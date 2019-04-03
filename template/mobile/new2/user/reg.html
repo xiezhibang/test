@@ -1,0 +1,245 @@
+<include file="public/header" title="注册" body="g4"/>
+<!--<//include file="public/header_nav" title="注册" href="javascript:history.back(-1)"/>-->
+<style>
+    #verify_code_img{
+        padding: .55467rem .21333rem;
+        width: 4.6rem;
+        height: 2.9rem;
+        color: white;
+        border-radius: .128rem;
+    }
+    .aaaaaaa{
+        background-color:#fb2186;
+    }
+</style>
+<!--注册表单-s-->
+<div class="loginsingup-input singupphone" style="padding-top: 1rem;">
+    <form action="" method="post" id="regFrom" >
+        <div class="content30">
+            <div class="lsu boo wicheck">
+                <img src="__STATIC__/images/nickname.png" alt="" class="reg-icon">
+                <input type="text" name="nickname" id="nickname" value="" placeholder="请输入名称"  class="c-form-txt-normal">
+            </div>
+            <div class="lsu boo wicheck">
+                <img src="__STATIC__/images/reg3.png" alt="" class="reg-icon">
+                <input type="text" name="username" id="username" value="" placeholder="请输入手机号"  class="c-form-txt-normal" onBlur="checkMobilePhone(this.value);">
+                <span id="mobile_phone_notice"></span>
+            </div>
+            <div class="lsu boo wicheck">
+                <img src="__STATIC__/images/reg1.png" alt="" class="reg-icon">
+                <input type="password" name="password" id="password" value="" placeholder="请设置6-20位登录密码" class="c-form-txt-normal" onBlur="check_password(this.value);">
+                <span id="password_notice"></span>
+            </div>
+            <div class="lsu boo wicheck">
+                <img src="__STATIC__/images/reg1.png" alt="" class="reg-icon">
+                <input type="password" id="password2" name="password2" value="" placeholder="确认密码" onBlur="check_confirm_password(this.value);">
+                <span id="confirm_password_notice"></span>
+            </div>
+            <if condition="$regis_sms_enable eq 1">
+                <div class="lsu boo zc_se">
+                    <img src="__STATIC__/images/reg2.png" alt="" class="reg-icon">
+                    <input class="fl" type="text" style="width:6rem;" id="mobile_code" value="" name="mobile_code" placeholder="请输入短信验证码" >
+                    <a class="fr" rel="mobile" onClick="sendcode(this)" style="line-height:.853333rem">获取验证码</a>
+                </div>
+            </if>
+            <input name="distribut" type="hidden" value="{:input('distribut')}">
+            <input id="sub" type="button" value="注册" onclick="checkSubmit()" class="btn_big1 login-btns" style="color: #fff;" />
+            <input  type="button" value="下载app" onclick="$('#downloadDiv').show();" class="btn_big1 login-btns" style="color: #fff;background-color: #666" />
+            <div class="reg-foot">
+            	<label for="#a"><img src="__STATIC__/images/270060208132186121.png" class="a" style="width: .6rem;height: .6rem;"/></label>
+            	<input type="checkbox" name="" id="a" value="" style="opacity: 0;" onclick="chickTY()"/>
+            	同意<a href="javascript:;" >《美桐荟网络服务协议》</a>及<a href="javascript:;">《美桐荟隐私保护声明》</a>
+            </div>
+        </div>
+    </form>
+</div>
+<!--弹窗-->
+<div id="downloadDiv" style="display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background:#fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <h2 style="color:#c60081;text-align: center">感谢您对本商城的注册</h2>
+        <br/><br/>
+        <a href="/android.php"><img style="margin-left: 10%;width:80%;" src="__STATIC__/images/download1.png"></a>
+        <br/><br/><br/><a href="https://itunes.apple.com/cn/app/%E7%BE%8E%E6%A1%90%E8%8D%9F/id1408373230?mt=8"><img style="margin-left: 10%;width:80%;" src="__STATIC__/images/download2.png"></a>
+        <br/>
+    </div>
+</div>
+<!--注册表单-s-->
+<script type="text/javascript">
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    });
+
+    $('.loginsignup').parent().css('background','#fff');
+$('#a').click(function(){
+	console.log($(this).prop('checked'))
+	if($(this).prop('checked')){
+		$('.a').attr('src','__STATIC__/images/386939939665574119.png')
+	}else{
+		$('.a').attr('src','__STATIC__/images/270060208132186121.png')
+	}
+})
+
+    function chickTY() {
+        $('#sub').toggleClass('aaaaaaa');
+    }
+    $('#a').click();
+
+
+    //提交表单
+    function checkSubmit()
+    {
+        $.ajax({
+            type:'POST',
+            url:"/index.php?m=Mobile&c=User&a=reg",
+            dataType:'JSON',
+            data:$('#regFrom').serialize(),
+            success:function(data){
+                if(data.status == 1){
+                    $('#downloadDiv').show();
+//                    showErrorMsg('注册成功，待app上架后即可下载');
+//                    windows.location.href='/index.php/Mobile/User/index';
+                }else{
+                    if(data.msg === undefined){
+                        showErrorMsg(data);
+                    }else{
+                        showErrorMsg(data.msg);
+                    }
+                }
+            }
+        })
+    }
+    var flag = false;
+    //手机验证
+    function checkMobilePhone(mobile){
+        if(mobile == ''){
+            showErrorMsg('手机不能空');
+            flag = false;
+        }else if(checkMobile(mobile)){ //判断手机格式
+            $.ajax({
+                type : "GET",
+                url:"/index.php?m=Mobile&c=Api&a=issetMobile",//+tab,
+//			url:"{:U('Mobile/User/comment',array('status'=>$_GET['status']),'')}/is_ajax/1/p/"+page,//+tab,
+                data :{mobile:mobile},// 你的formid 搜索表单 序列化提交
+                success: function(data)
+                {
+                    if(data == '0')
+                    {
+                        flag = true;
+                    }else{
+                        showErrorMsg('* 手机号已存在');
+                        flag = false;
+                    }
+                }
+            });
+        }else{
+            showErrorMsg('* 手机号码格式不正确');
+           flag = false;
+        }
+    }
+
+    //密码
+    function check_password(password) {
+        var password = $.trim(password);
+        if(password == ''){
+            showErrorMsg("*登录密码不能包含空格");
+           flag = false;
+        }else if (password.length < 6) {
+            showErrorMsg('*登录密码不能少于 6 个字符。');
+           flag = false;
+        }
+    }
+
+    //验证确认密码
+    function check_confirm_password(confirm_password) {
+        var password1 = $.trim($('#password').val());
+        var password2 = $.trim(confirm_password);
+        if (password1 == '') {
+            showErrorMsg("*确认密码不能包含空格");
+           flag = false;
+        }
+        if (password2.length < 6) {
+            showErrorMsg('*登录密码不能少于 6 个字符。');
+           flag = false;
+        }
+        if (password2 != password1) {
+            showErrorMsg('*两次密码不一致');
+           flag = false;
+        }else{
+            flag = true;
+        }
+    }
+
+    function countdown(obj) {
+        var s = 150;
+        //改变按钮状态
+        obj.disabled = true;
+        callback();
+        //循环定时器
+        var T = window.setInterval(callback,1000);
+        function callback()
+        {
+            if(s <= 0){
+                //移除定时器
+                window.clearInterval(T);
+                obj.disabled=false;
+                obj.innerHTML='获取短信验证码';
+            }else{
+                if(s<=10){
+                    obj.innerHTML = '0'+ --s + '秒后再获取';
+                }else{
+                    obj.innerHTML = --s+ '秒后再获取';
+                }
+            }
+        }
+    }
+
+    //发送短信验证码
+    function sendcode(obj){
+        if(flag){
+            $.ajax({
+                url:'/index.php?m=Mobile&c=Api&a=send_validate_code&t='+Math.random() ,
+                type:'post',
+                dataType:'json',
+                data:{type:$(obj).attr('rel'),send:$.trim($('#username').val()), scene:1},
+                success:function(res){
+                    if(res.status==1){
+                        //成功
+                        countdown(obj)
+                        showErrorMsg(res.msg);
+                    }else{
+                        //失败
+                        showErrorMsg(res.msg);
+                    }
+                }
+            })
+        }
+    }
+
+
+    // 普通 图形验证码
+    //    function verify(){
+    //        $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&type=user_reg&r='+Math.random());
+    //    }
+</script>
+	</body>
+</html>
+<style>
+    .wicheck,.zc_se{
+        position: relative;
+
+    }
+    .reg-icon{
+        width: .8rem;
+        height:.8rem;
+        position: absolute;
+        top:.9rem;
+        left:0;
+    }
+
+</style>

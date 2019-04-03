@@ -1,0 +1,76 @@
+<include file="public/header" title="搜索" body=""/>
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return">
+            <a href="javascript:history.back(-1)"><img src="__STATIC__/images/return.png" alt="返回"></a>
+        </div>
+        <div class="ds-in-bl search center fr">
+            <form method="post" action="{:U('Member/vipGoodsList')}" id="sourch_form">
+                <input type="text" name="key" id="key" value="" class="ajax-input" placeholder="搜索美妆"
+                       style="font-size: .5rem;"/>
+                <span onclick="ajaxsecrch()" style="font-size: .5rem;">
+        		搜索
+        	</span>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!--<div class="near-le-ri p">-->
+<!--<div class="maleri30">-->
+<!--<span>最近搜索</span>-->
+<!--<img src="__STATIC__/images/dele.png"/>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="lb_showhide se_shien p hua" style="display: block;">-->
+<!--<div class="maleri30">-->
+<!--<ul>-->
+<!--&lt;!&ndash;<li><a href="">返回默认</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a href="">手机数码</a></li>&ndash;&gt;-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+<div class="near-le-ri p">
+    <div class="maleri30">
+        <span>猜你喜欢</span>
+        <!--<a href="">-->
+        <!--<img src="__STATIC__/images/refresh.png"/>-->
+        <!--</a>-->
+    </div>
+</div>
+<div class="lb_showhide se_shien p hong" style="display: block;">
+    <div class="lb_showhide se_shien p" style="display: block;">
+        <div class="maleri30">
+            <ul>
+                <foreach name="tpshop_config.hot_keywords" item="wd" key="k">
+                    <li><a href="{:U('Member/vipGoodsList',['key'=>$wd])}"
+                        <if condition="$k eq 0">class="ht"</if>
+                        >{$wd}</a></li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="maleri30">-->
+    <!--<ul>-->
+    <!--<li>-->
+    <!--&lt;!&ndash;<a href="javascript:;">会员任领美妆</a>&ndash;&gt;-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+</div>
+
+<!--底部导航-start-->
+<!--底部导航-end-->
+</body>
+</html>
+<script>
+    function ajaxsecrch() {
+        if ($.trim($('#key').val()) != '') {
+            $("#sourch_form").submit();
+        } else {
+            layer.open({content: '请输入搜索关键字', time: 2, style: 'font-size:.6rem'});
+        }
+    }
+    $('.loginsignup').parent().css('background','#fff');
+</script>

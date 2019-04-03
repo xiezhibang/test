@@ -1,0 +1,396 @@
+<include file="public/header" title="设置" body="g4"/>
+<include file="public/header_nav" title="设置" href="javascript:history.go(-1);"/>
+<div class="floor my p setting">
+    <div class="content">
+        <div class="floor list7">
+            <div class="myorder he p">
+                <div class="content30">
+                    <div class="order">
+                        <div class="fl">
+                            <span>头像</span>
+                            <!--<span class="bridh"></span>-->
+                        </div>
+                        <div class="fr">
+                            <!--<a href="">-->
+                            <div class="hendicon">
+                                <!--<span></span>-->
+                                <form id="head_pic" method="post" enctype="multipart/form-data">
+                                    <label class="file" style="cursor:pointer;">
+                                        <div class="around" id="fileList">
+                                            <img src="{$user.head_pic|default='__STATIC__/images/user68.jpg'}"/>
+                                            <input type="file" accept="image/*" name="head_pic"
+                                                   onchange="handleFiles(this)" style="display:none">
+                                        </div>
+                                    </label>
+                                </form>
+                            </div>
+                            <!--</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="myorder p">
+                <div class="content30">
+                    <a href="javascript:void(0)" onclick="$('#nicknameDiv').show()">
+                        <div class="order">
+                            <div class="fl">
+                                <span>用户名</span>
+                            </div>
+                            <div class="fr">
+                                <span>{$user.nickname}</span>
+                                <i class="Mright" style="margin-top: .72rem;"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="myorder p">
+                <div class="content30">
+                    <a href="javascript:void(0)" onclick="$('#sexDiv').show()">
+                        <div class="order">
+                            <div class="fl">
+                                <span>性别</span>
+                            </div>
+                            <div class="fr">
+                                <span>{$sex[$user.sex]}</span>
+                                <i class="Mright" style="margin-top: .72rem;"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!--<div class="myorder p">-->
+                <!--<div class="content30">-->
+                    <!--<a href="javascript:void(0)" onclick="$('#mobileDiv').show()">-->
+                        <!--<div class="order">-->
+                            <!--<div class="fl">-->
+                                <!--<span>手机</span>-->
+                            <!--</div>-->
+                            <!--<div class="fr">-->
+                                <!--<span>{$user.mobile}</span>-->
+                                <!--<i class="Mright" style="margin-top: .72rem;"></i>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="myorder p bo">
+                <div class="content30">
+                    <a href="{:U('Mobile/User/userinfo',array('action'=>'email'))}">
+                        <div class="order">
+                            <div class="fl">
+                                <span>邮箱</span>
+                            </div>
+                            <div class="fr">
+                                <span>{$user.email}</span>
+                                <i class="Mright"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>-->
+            <div class="myorder p ma-to-20">
+                <div class="content30">
+                    <a href="{:U('Mobile/User/password')}">
+                        <div class="order">
+                            <div class="fl">
+                                <span>修改密码</span>
+                            </div>
+                            <div class="fr">
+                                <i class="Mright"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="myorder p">
+                <div class="content30">
+                    <a href="{:U('Mobile/User/address_list')}">
+                        <div class="order">
+                            <div class="fl">
+                                <span>收货地址</span>
+                            </div>
+                            <div class="fr">
+                                <i class="Mright" style="margin-top: .72rem;"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!--<div class="myorder p bo">
+                <div class="content30">
+                    <a href="{:U('Mobile/User/authinfo')}">
+                        <div class="order">
+                            <div class="fl">
+                                <span>实名认证</span>
+                            </div>
+                            <div class="fr">
+                                <i class="Mright"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            &lt;!&ndash;</div>&ndash;&gt;
+        </div>-->
+        </div>
+        <div class="close">
+            <a onclick="logout()" id="logout"
+               style="color: #fff;background: #c60081;margin-top: 3rem;border-radius: 0;">安全退出</a>
+            <a id="asubmit" style="display:none;color: #fff;background: #c60081;margin-top: 3rem;border-radius: 0;"
+               href="javascript:;" onclick="javascript:$('#head_pic').submit();">保存头像</a>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<div id="nicknameDiv" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <div style="padding: 0 0" class="loginsingup-input singupphone findpassword">
+            <form action="{:U('Mobile/User/userinfo')}" method="post">
+                <div class="content30">
+                    <div class="lsu bk">
+                        <span style="height: auto;line-height: .9rem;">昵称</span>
+                        <input style="width: 8rem;" type="text" name="nickname" value="{$user.nickname}" placeholder="请输入您的昵称"/>
+                    </div>
+                    <input type="submit" name="" id="" value="确认修改" style="width: 100%;margin-top: 2rem;height: 1.6rem;line-height: 1.6rem;color: #fff;background: #c60081;"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<div id="sexDiv" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <div class="loginsingup-input">
+            <form action="{:U('Mobile/User/userinfo')}" method="post">
+                <div class="content30">
+                    <div class="bandg">
+                        <ul>
+                            <li>
+                                <i class="boy"></i>
+                            </li>
+                            <li>
+                                <i class="girl"></i>
+                            </li>
+                            <input type="hidden" name="sex" id="sex" value="{$user[sex]}"/>
+                        </ul>
+                    </div>
+                    <input type="submit" id="" value="确认"
+                           style="width: 100%;margin-top: 2rem;height: 1.6rem;line-height: 1.6rem;color: #fff;background: #c60081;"/>
+                </div>
+            </form>
+        </div>
+        <script type="text/javascript">
+            var num = $('#sex').val();
+            if (num == '1') {
+                $('.bandg ul li .boy').addClass('boy_click');
+            }
+            if (num == '2') {
+                $('.bandg ul li .girl').addClass('girl_click');
+            }
+            //切换
+            $(function () {
+                $('.bandg ul li .boy').click(function () {
+                    $(this).addClass('boy_click').parent().siblings().find('.girl').removeClass('girl_click');
+                    $(this).parent('li').nextAll(':hidden').val(1)
+                })
+                $('.bandg ul li .girl').click(function () {
+                    $(this).addClass('girl_click').parent().siblings().find('.boy').removeClass('boy_click');
+                    $(this).parent('li').nextAll(':hidden').val(2)
+                })
+            })
+        </script>
+    </div>
+</div>
+<!--弹窗-->
+<div id="mobileDiv" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <div style="padding: 0 0" class="loginsingup-input singupphone findpassword">
+            <form action="{:U('Mobile/User/userinfo')}" method="post" onsubmit="return submitverify(this)">
+                <div class="content30">
+                    <div class="lsu bk">
+                        <span style="line-height: .853333rem;">手机号</span>
+                        <input type="text" style="line-height: .853333rem;width: 8rem;" name="mobile" id="tel"
+                               value="{$user.mobile}" placeholder="请输入您的手机号" onBlur="checkMobilePhone(this.value);"/>
+                    </div>
+                    <div class="lsu boo zc_se">
+                        <input type="text" name="mobile_code" style="width: 6rem;" id="mobile_code" value=""
+                               placeholder="请输入验证码">
+                        <a href="javascript:void(0);" rel="mobile" id="fcode" onclick="sendcode(this)">获取短信验证码</a>
+                    </div>
+                    <input type="submit" name="" id="" value="确认修改"
+                           style="width: 100%;margin-top: 2rem;height: 1.6rem;line-height: 1.6rem;color: #fff;background: #c60081;"/>
+                </div>
+            </form>
+        </div>
+        <script>
+            //手机验证
+            function checkMobilePhone(mobile) {
+                if (mobile == '') {
+                    showErrorMsg('请输入您的手机号');
+                    return false;
+                } else if (checkMobile(mobile)) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/index.php?m=Mobile&c=Api&a=issetMobile",//+tab,
+//			url:"{:U('Mobile/User/comment',array('status'=>$_GET['status']),'')}/is_ajax/1/p/"+page,//+tab,
+                        data: {mobile: mobile},// 你的formid 搜索表单 序列化提交
+                        success: function (data) {
+                            if (data == '0') {
+                                return true;
+                            } else {
+                                $('#fcode').attr('id', 'fetchcode');
+                                showErrorMsg('手机号已存在！');
+                                return false;
+                            }
+                        }
+                    });
+                } else {
+                    showErrorMsg('手机号码格式不正确！');
+                    return false;
+                }
+            }
+
+
+            //发送短信验证码
+            function sendcode(obj) {
+                var tel = $.trim($('#tel').val());
+                var obj = $(obj);
+                if (tel == '') {
+                    showErrorMsg('请输入您的号码！');
+                    return false;
+                }
+                var s = 60;
+                //改变按钮状态
+                obj.unbind('click');
+                //添加样式
+                obj.attr('id', 'fetchcode');
+                callback();
+                //循环定时器
+                var T = window.setInterval(callback, 1000);
+
+                function callback() {
+                    if (s <= 0) {
+                        //移除定时器
+                        window.clearInterval(T);
+                        obj.bind('click', sendcode)
+                        obj.removeAttr('id', 'fetchcode');
+                        obj.text('获取短信验证码');
+                    } else {
+                        obj.text(--s + '秒后再获取');
+                    }
+                }
+
+                $.ajax({
+//            url:'/index.php?m=Mobile&c=User&a=send_validate_code&t='+Math.random(), //原获取短信验证码方法
+                    url: "/index.php?m=Mobile&c=Api&a=send_validate_code&scene=6&type=mobile&send=" + tel,
+                    type: 'post',
+                    dataType: 'json',
+                    data: {type: obj.attr('rel'), send: tel},
+                    success: function (res) {
+                        if (res.status == 1) {
+                            //成功
+                            showErrorMsg(res.msg);
+                        } else {
+                            //失败
+                            showErrorMsg(res.msg);
+                            //移除定时器
+                            window.clearInterval(T);
+                            obj.removeAttr('id', 'fetchcode');
+                            obj.text('获取短信验证码');
+                        }
+                    }
+                })
+            }
+
+            //提交前验证表单
+            function submitverify(obj) {
+                var tel = $.trim($('#tel').val());
+                if (tel == '') {
+                    showErrorMsg('请输入您的手机号！');
+                    return false;
+                }
+                if ($('#mobile_code').val() == '') {
+                    showErrorMsg('验证码不能空！');
+                    return false;
+                }
+                $(obj).onsubmit();
+            }
+        </script>
+    </div>
+</div>
+<script type="text/javascript">
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    })
+
+    function logout() {
+        window.localStorage.removeItem('username');
+        window.localStorage.removeItem('password');
+        window.location.href = "{:U('User/logout')}";
+    }
+
+    //显示上传照片
+    window.URL = window.URL || window.webkitURL;
+    function handleFiles(obj) {
+        fileList = document.getElementById("fileList");
+        var files = obj.files;
+        img = new Image();
+        if (window.URL) {
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.width = 60;
+            img.height = 60;
+            img.onload = function (e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+            if (fileList.firstElementChild) {
+                fileList.removeChild(fileList.firstElementChild);
+            }
+            $('#fileList').find('img').remove();
+            fileList.appendChild(img);
+        } else if (window.FileReader) {
+            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function (e) {
+                img.src = this.result;
+                img.width = 60;
+                img.height = 60;
+                $('#fileList').find('img').remove();
+                fileList.appendChild(img);
+            }
+        } else {
+            //ie
+            obj.select();
+            obj.blur();
+            var nfile = document.selection.createRange().text;
+            document.selection.empty();
+            img.src = nfile;
+            img.width = 60;
+            img.height = 60;
+            img.onload = function () {
+
+            }
+            $('#fileList').find('img').remove();
+            fileList.appendChild(img);
+        }
+        $('#asubmit').show().click();
+        $('#logout').hide();
+    }
+
+    $(function () {
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            $('#logout').hide();
+        }
+    });
+</script>
+</body>
+</html>

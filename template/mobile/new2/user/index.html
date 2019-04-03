@@ -1,0 +1,364 @@
+<include file="public/header" title="个人中心" body="g4"/>
+<div class="myhearder">
+    <div class="person">
+        <!--<a href="">-->
+        <div class="fl personicon">
+            <div class="personicon">
+                <img src="{$user[head_pic]|default=" __STATIC__/images/user68.jpg"}"/>
+            </div>
+        </div>
+        <div class="fl lors">
+            <p><span>{$user['nickname']}</span></p>
+            <p>等级：
+                <span>
+                    <if condition="$user['is_vip'] eq 1">
+						{$distributor_level[$user['distributor_level']]}
+                        <img style="width: 1.2rem" onclick="$('#vipDivBtn').show()" src="__STATIC__/images/vip1.png">
+						<else/>普通会员
+                        <!--<img style="width: 1.2rem" onclick="$('#vipDivBtn').show()" src="__STATIC__/images/vip0.png">-->
+                    </if>
+                </span>
+            </p>
+            <if condition="$first_nickname neq ''">
+                <p> 推荐人：
+                    <span style="font-size:.6rem">由({$first_nickname})推荐</span>
+                </p>
+            </if>
+            <p>美妆福利额度：<span>{$user['quota']}</span></p>
+            <p>名品奖励额度：<span>{$user['famous_quota']}</span></p>
+
+        </div>
+        <!--</a>-->
+    </div>
+    <div class="set">
+        <!--设置-->
+        <a class="setting" href="{:U('Mobile/User/userinfo')}"><i style="width: 1rem;height: 1rem;"></i></a>
+        <!--&lt;!&ndash;我的留言&ndash;&gt;-->
+        <!--<a class="massage" href="{:U('User/message_notice')}"><i></i></a>-->
+    </div>
+    <!--<div class="scgz">
+        <ul>
+            <li>
+                <a href="{:U('Mobile/User/collect_list')}">
+                    <h2>{$user.collect_count}</h2>
+                    <p>我的收藏</p>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Mobile/User/message_notice')}">
+                    <h2>{$user_message_count}</h2>
+                    <p>消息通知</p>
+                </a>
+            </li>
+        </ul>
+    </div>-->
+</div>
+<div class="user-money" onclick="$('#meibi').show()">
+    <p class="user-money-text">累计美币</p>
+    <p class="user-money-data" style="color: red;font-size: 1rem">{$rebate+$user['user_money']}</p>
+    <ul class="content user-money-ul">
+        <li class="fl">
+            <p>今日美币</p>
+            <p class="user-money-data">{$today_rebate}</p>
+        </li>
+        <li class="fl">
+            <p>待收美币</p>
+            <p class="user-money-data">{$rebate}</p>
+        </li>
+        <li class="fl">
+            <p>可用美币</p>
+            <p class="user-money-data">{$user['user_money']}</p>
+        </li>
+    </ul>
+</div>
+<div class="floor my p">
+    <div class="content">
+        <!--订单管理模块-s-->
+        <!--<div class="floor myorder ma-to-20 p">
+            <div class="content30">
+                <div class="order">
+                    <div class="fl">
+                        <img src="__STATIC__/images/mlist.png"/>
+                        <span>我的订单</span>
+                    </div>
+                    <div class="fr">
+                        <a href="{:U('Mobile/User/order_list')}">
+                            <span>全部订单</span>
+                            <i class="Mright"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="floor">
+            <ul>
+                <li>
+                    <a href="{:U('Mobile/User/order_list',array('type'=>'WAITPAY'))}">
+                        <if condition="$user['waitPay'] neq 0">
+                        <span>{$user.waitPay}</span>
+                        </if>
+                        <img src="__STATIC__/images/q1.png" alt=""/>
+                        <p>待付款</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Mobile/User/order_list',array('type'=>'WAITSEND'))}">
+                        <if condition="$user['waitSend'] neq 0">
+                            <span>{$user.waitSend}</span>
+                        </if>
+                        <img src="__STATIC__/images/q2.png" alt=""/>
+                        <p>待发货</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Mobile/User/wait_receive',array('type'=>'WAITRECEIVE'))}">
+                        <if condition="$user['waitReceive'] neq 0">
+                            <span>{$user.waitReceive}</span>
+                        </if>
+                        <img src="__STATIC__/images/q3.png" alt=""/>
+                        <p>已发货</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Mobile/User/return_goods_list',array('type'=>1))}">
+                        <if condition="$user['return_count'] neq 0">
+                            <span>{$user.return_count}</span>
+                        </if>
+                        <img src="__STATIC__/images/q4.png" alt=""/>
+                        <p>退款/退货</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!--user列表-->
+        <div class="user-index-ul">
+            <ul class="content">
+                <li class="fl">
+                    <a href="{:U('Mobile/User/order_list')}">
+                        <div>
+                            <img src="__STATIC__/images/form.png"/>
+                        </div>
+                        全部订单
+                    </a>
+                </li>
+                <li class="fl">
+                    <a href="{:U('Mobile/User/account')}">
+                        <div>
+                            <img src="__STATIC__/images/deposit.png"/>
+                        </div>
+                        提现管理
+                    </a>
+                </li>
+                <li class="fl">
+                    <a href="{:U('Distribut/lower_list')}">
+                        <div>
+                            <img src="__STATIC__/images/association.png" style="height: 1rem;margin-bottom: .7rem;"/>
+                        </div>
+                        我的社群
+                    </a>
+                </li>
+                <li class="fl">
+                    <a href="{:U('Mobile/User/address_list')}">
+                        <div>
+                            <img src="__STATIC__/images/address_1.png" style="width: .9rem;"/>
+                        </div>
+                        地址管理
+                    </a>
+                </li>
+                <!--<li class="fl">-->
+                <!--<a href="javascript:;">-->
+                <!--<div>-->
+                <!--<img src="__STATIC__/images/association.png" style="height: 1rem;margin-bottom: .7rem;"/>-->
+                <!--</div>-->
+                <!--我的社群-->
+                <!--</a>-->
+                <!--</li>-->
+                <!--<li class="fl">-->
+                <!--<a href="javascript:;">-->
+                <!--<div>-->
+                <!--<img src="__STATIC__/images/discount.png"/>-->
+                <!--</div>-->
+                <!--任领查询-->
+                <!--</a>-->
+                <!--</li>-->
+                <!--<li class="fl">-->
+                <!--<a href="javascript:;">-->
+                <!--<div>-->
+                <!--<img src="__STATIC__/images/numbers.png"/>-->
+                <!--</div>-->
+                <!--单号查询-->
+                <!--</a>-->
+                <!--</li>-->
+                <li class="fl">
+                    <a href="{:url('member/advisory')}" >
+                        <div>
+                            <img src="__STATIC__/images/service.png"/>
+                        </div>
+                        联系客服
+                    </a>
+                </li>
+                <li class="fl">
+                    <a href="javascript:;" onclick="appShare()">
+                        <div>
+                            <img src="__STATIC__/images/friends.png" style="height: 1rem;margin-bottom: .7rem;"/>
+                        </div>
+                        邀请好友
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<!--弹窗-->
+<div id="meibi" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;" class="hides">
+    <div style="line-height:.8rem;width: 96%;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <div class="user-money" style="margin-top: auto">
+            <p class="user-money-text">累计美币</p>
+            <p class="user-money-data" style="color: red;font-size: 1.2rem">{$total_rebate+$rebate}</p>
+            <ul class="content user-money-ul">
+                <li class="fl">
+                    <p>今日美币</p>
+                    <p class="user-money-data">{$today_rebate}</p>
+                </li>
+                <li class="fl">
+                    <p>待收美币</p>
+                    <p class="user-money-data">{$rebate}</p>
+                </li>
+                <li class="fl">
+                    <p>可用美币</p>
+                    <p class="user-money-data">{$user['user_money']}</p>
+                </li>
+            </ul>
+        </div>
+        <div style="font-size: .48rem;text-align: center;margin-bottom: -1.2rem;">一周今日美币收益表</div>
+        <div id="main" style="width: 14rem;height:12rem;overflow: hidden;"></div>
+    </div>
+</div>
+<div id="vipDivBtn" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;" class="hides">
+    <div style="line-height:1.1rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <if condition="$user.is_vip eq 1">
+            <div style="width: 100%;height: 7.5rem;position: relative;">
+                <img src="__STATIC__/images/vip.png" width="100%" height="100%"/>
+                <p style="width: 100%;font-size: .5rem;color:#c3c3c3;position: absolute;top: 50%;transform: translateY(-50%);text-align: center;">
+                    可用美妆认领额度：{$user.quota}美币
+                </p>
+            </div>
+            <else/>
+
+                <h3 id="vip" style="color:#c60081;">你尚不是会员，美桐荟美亲VIP会员特权与福利</h3>
+                <p>1.学习课程：线上美妆专业和互联网创业分享课程！</p>
+                <p>2.美妆福利：价值2000元美容护肤品和彩妆日化等！</p>
+                <p>3.尖货特惠：享有尖货特惠产品VIP特价优惠，并获得相应的美妆福利和美币奖励！</p>
+                <p>4.分享特权：每推荐3位好友开卡，获得1000元任领和50元美币奖励！</p>
+                <p>5.创业机会：有资格竞聘服务商获得百万中产年薪！</p>
+                <br/>
+                <p>美币说明：相当于现金价值在平台使用，也可申请平台按现金八折回购</p>
+        </if>
+    </div>
+</div>
+<!--弹窗-->
+<script>
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    })
+    $('#vip').click(function () {
+        window.location.href = '{:url("viphtml")}';
+    })
+</script>
+
+
+<!--底部导航-start-->
+<include file="public/footer_nav"/>
+<!--底部导航-end-->
+<script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="http://echarts.baidu.com/dist/echarts.common.min.js"></script>
+<script type="text/javascript">
+    var getDpr = function getDpr(){
+        var dpr = $('html').attr('data-dpr');
+        if (dpr == 1) {
+            return 12;
+        }else if (dpr == 2) {
+            return  24;
+        }else {
+            return 36;
+        }
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.title = '最近7日社群商品收益美币';
+
+    option = {
+        color: ['#c60081'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '1%',
+            right: '1%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: {$low_week},
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel : {
+                    textStyle : {
+                        fontSize : getDpr()
+                    }
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel : {
+                    textStyle : {
+                        fontSize : getDpr()
+                    }
+                }
+            }
+        ],
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '60%',
+                data: {$rebate_week},
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true, //开启显示
+                            position: 'top', //在上方显示
+                            textStyle: { //数值样式
+                                color: 'black',
+                                fontSize: getDpr()
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</body>
+</html>

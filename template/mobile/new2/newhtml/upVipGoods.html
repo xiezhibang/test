@@ -1,0 +1,138 @@
+<include file="public/header" title="商品详情" body=""/>
+<div class="he_sustain" style="position: fixed;top: 0;left: 0;width: 100%;">
+    <div class="classreturn loginsignup detail">
+        <div class="content">
+            <div class="ds-in-bl return">
+                <a href="javascript:history.back(-1)"><img src="__STATIC__/images/return.png" alt="返回"></a>
+            </div>
+            <div class="ds-in-bl search center">
+                <span>详情</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--顶部隐藏菜单-s-->
+<include file="public/top_nav"/>
+<!--顶部隐藏菜单-e-->
+<!--商品抢购 start-->
+<!--商品s-->
+<style>
+    .si{
+        font-size: .48rem;
+        padding: 4px 8px;
+        border: 2px #fff solid;
+    }
+</style>
+
+<div class="xq_details" style="margin-top: 1.87733rem;">
+    <div class="banner ban1 detailban">
+        <div class="mslide mslide-img" id="slideTpshop">
+            <ul>
+                <!--图片-s-->
+                <foreach name="goods_images_list" item="pic">
+                    <li><a href="javascript:void(0)"><img src="{$pic[image_url]}" alt=""></a></li>
+                </foreach>
+                <!--图片-e-->
+            </ul>
+
+        </div>
+    </div>
+    <div class="goodsInfo-content ">
+        <div class="clearfix">
+            <div class="fl goodsInfo-content-l" style="font-size: .8rem">
+                {$goods.goods_name}
+            </div>
+        </div>
+        <div class="clearfix goodsInfo-content-text">
+            <!--<span class="fl">商品评分-->
+            <!--<if condition="!empty($commentStatistics.c1) and !empty($commentStatistics.c0)">-->
+            <!--{:round($commentStatistics.c1/$commentStatistics.c0,3)*100}%-->
+            <!--<else/>0</if>-->
+            <!--</span>-->
+            <span class="fl">库存{$goods.store_count}件</span>
+            <span class="fr">{$goods.sales_sum}人已买</span>
+        </div>
+    </div>
+    <div class="goodsInfo-data">
+        <if condition="$good['is_recommend'] eq 1"><span class="goodsInfo-data-icon">推荐</span></if>
+        {$goods.goods_remark}
+    </div>
+    <div class="goodsInfo-datas">
+        <p class="goodsInfo-datas-title">
+            商品详情
+        </p>
+        <style>
+            #goodsContent p img {
+                width: 100%;
+            }
+        </style>
+        <div id="goodsContent">
+            {$goods.goods_content|htmlspecialchars_decode}
+        </div>
+    </div>
+    <!--添加购物车JS-->
+    <script src="__PUBLIC__/js/mobile_common.js" type="text/javascript" charset="utf-8"></script>
+</div>
+<!--商品-e-->
+
+<!--底部按钮-s-->
+<div class="podee">
+    <div class="cart-concert-btm p">
+        <div class="hui-foot" style="">
+            <div class="hui-foot-content" onclick="javascript:history.back(-1)" style="background-color: #666;">
+                返回列表
+            </div>
+            <div class="hui-foot-content" onclick="AjaxBuyNow({$goods.goods_id},1,1);">
+                立即购买￥{$goods.shop_price}
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部按钮-e-->
+
+<script type="text/javascript">
+    function AjaxBuyNow(goods_id, num) {
+        $.ajax({
+            type: "POST",
+            url: "/index.php?m=Mobile&c=Cart&a=ajaxAddCart",
+            data: {goods_id: goods_id, goods_num: num},
+            dataType: 'json',
+            success: function (data) {
+                layer.open({content: data.msg, time: 3});
+                if (data.status === 1) {
+                    tp_cart_info = $('#tp_cart_info');
+                    cart_num = parseInt(tp_cart_info.html()) + parseInt(num);
+                    tp_cart_info.html(cart_num);
+                    setTimeout("location.href = '/index.php?m=Mobile&c=Cart&a=cart2'", 3000);
+                    return false;
+                }else if (data.status === -9) {
+                    // tp_cart_info = $('#tp_cart_info');
+                    // cart_num = parseInt(tp_cart_info.html()) + parseInt(num);
+                    // tp_cart_info.html(cart_num);
+                    setTimeout("location.href = '/Mobile/User/order_list'", 3000);
+                    return false;
+                }else{
+                    location.reload();
+                    return false;
+                }
+            }
+        });
+    }
+</script>
+
+<include file="public/wx_share"/>
+</body>
+</html>
+<style type="text/css">
+    .podee .cart-concert-btm .fr ul li {
+        width: 48%;
+        margin-right: 2%;
+    }
+    .hui-foot-content{
+        width: 6rem;height: 1.4rem;margin: 0 .8rem;margin-top: .3rem;background: #c60081;text-align: center;line-height: 1.4rem;color: #fff;float: left;font-size: .6rem;border-radius: 10px;
+    }
+    .hui-foot{
+        position: fixed;bottom: 0;left: 0;width: 100%;height: 2rem;background: #fff;flex-direction: row;
+    }
+</style>

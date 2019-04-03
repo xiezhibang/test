@@ -1,0 +1,215 @@
+<include file="public/header" title="登录" body=""/>
+<include file="public/header_nav" title="登录" href="javascript:history.back(-1);"/>
+
+<div class="loginsingup-input" style="">
+    <!--登录表单-s-->
+    <form id="loginform" method="post">
+        <input type="hidden" name="referurl" id="referurl" value="{$referurl}">
+        <div class="content30" style="padding-top: 1rem;">
+            <div class="lsu">
+                <img src="__STATIC__/images/reg3.png" alt="" class="reg-icon">
+                <input type="text" name="username" id="username" value="" placeholder="请输入手机号"/>
+            </div>
+            <div class="lsu">
+                <img src="__STATIC__/images/reg1.png" alt="" class="reg-icon">
+                <input type="password" name="password" id="password" value="" placeholder="请输入密码"/>
+                <i></i>
+            </div>
+
+            <input type="button" value="登录" id="postLogin" onclick="submitverify()"
+                   class="btn_big1 login-btns" style="color: #fff;background: #c60081;"/>
+
+            <input type="button" value="找回密码" onclick="javascript:window.location.href='{:U('User/forget_pwd')}'"
+                   class="btn_big1 login-btns" style="background-color: #f5f5f5"/>
+        </div>
+    </form>
+    <!--登录表单-e-->
+</div>
+<!--底部导航-start-->
+<include file="public/footer_nav"/>
+<!--底部导航-end-->
+
+<!--第三方登陆-s-->
+<!--<div class="thirdlogin" style="margin-top: 12rem;">-->
+<!--<h4 style="background: #f5f5f5;">第三方登陆</h4>-->
+<!--<ul class="clearfix">-->
+<!--<li class="fl">-->
+<!--<a class="ta-weixin" href="{:U('LoginApi/login',array('oauth'=>'weixin'))}" target="_blank" title="weixin">-->
+<!--<div class="icon">-->
+<!--<img src="__STATIC__/images/wx.png" />-->
+<!--<p>微信登陆</p>-->
+<!--</div>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="fl">-->
+<!--<a href="">-->
+<!--<div class="icon">-->
+<!--<img src="__STATIC__/images/zfb.png" />-->
+<!--<p>支付宝</p>-->
+<!--</div>-->
+<!--</a>-->
+<!--</li>-->
+<!--<li class="fl">-->
+<!--<a class="ta-qq" href="{:U('LoginApi/login',array('oauth'=>'qq'))}" target="_blank" title="QQ">-->
+<!--<div class="icon">-->
+<!--<img src="__STATIC__/images/qq.png" />-->
+<!--<p>QQ</p>-->
+<!--</div>-->
+<!--</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--第三方登陆-e-->
+<!--<script type="text/javascript">-->
+    <!--window.localStorage.setItem('username','13249121505');-->
+    <!--window.localStorage.setItem('password','qweqwe');-->
+
+<!--//    window.parent.$api.setStorage('userData',{username:'13249121505',password:'qweqwe'});-->
+<!--//    userData = window.parent.$api.getStorage('test');-->
+<!--//    $('#username').val(userData);-->
+<!--//    console.log(userData);-->
+<!--</script>-->
+<script type="text/javascript">
+    $('.loginsignup').parent().css('background','#fff');
+    function verify() {
+        $('#verify_code_img').attr('src', '/index.php?m=Mobile&c=User&a=verify&r=' + Math.random());
+    }
+
+    //复选框状态
+    function remember(obj) {
+        var che = $(obj).attr("class");
+        if (che == 'che check_t') {
+            $("#autologin").prop('checked', false);
+        } else {
+            $("#autologin").prop('checked', true);
+        }
+    }
+
+//    apiready = function () {
+//        $api.setStorage('test','123123');
+//        var username = window.parent.$api.byId('username').val();
+//        var password = window.parent.$api.byId('password').val();
+//        var postLogin = window.parent.$api.byId('postLogin');
+//        window.parent.$api.addEvt(postLogin,'click',function () {
+//            if(username == '') {
+//                app.alert({title: '系统提示', msg: '用户名不能为空!'});
+//                return false;
+//            }
+//            if(!checkMobile(username) && !checkEmail(username)) {
+//                app.alert({title: '系统提示', msg: '账号格式不匹配!'});
+//                return false;
+//            }
+//            if(password == '') {
+//                app.alert({title: '系统提示', msg: '密码不能为空!'});
+//                return false;
+//            }
+//
+//            var data = {
+//                username: username,
+//                password: password,
+//            };
+//            console.log(data);
+//        })
+//    };
+
+    function submitverify() {
+
+        var username = $.trim($('#username').val());
+        var password = $.trim($('#password').val());
+        var remember = $('#remember').val();
+        var referurl = $('#referurl').val();
+        var verify_code = $.trim($('#verify_code').val());
+		if(username == '') {
+			showErrorMsg('用户名不能为空!');
+			return false;
+		}
+		if(!checkMobile(username) && !checkEmail(username)) {
+			showErrorMsg('账号格式不匹配!');
+			return false;
+		}
+		if(password == '') {
+			showErrorMsg('密码不能为空!');
+			return false;
+		}
+		var codeExist = $('#verify_code').length;
+		if(codeExist && verify_code == '') {
+			showErrorMsg('验证码不能为空!');
+			return false;
+		}
+        if(codeExist) {
+            data.verify_code = verify_code;
+        }
+
+        var data = {
+            username: username,
+            password: password,
+            referurl: referurl
+        };
+
+		$.ajax({
+			type: 'post',
+			url: '/index.php?m=Mobile&c=User&a=do_login&t=' + Math.random(),
+			data: data,
+			dataType: 'json',
+			success: function(res) {
+
+//                apiready = function() {
+//                    userData = {username: data.username, password: data.password};
+//                    api.setStorage('userData', {username: data.username, password: data.password});
+//                    api.alert(userData);
+//                };
+
+				if(res.status == 1) {
+                    window.localStorage.setItem('username',username);
+                    window.localStorage.setItem('password',password);
+
+					var url = res.url.toLowerCase();
+                    window.location.href = '/index.php/mobile/User/index.html';
+
+//					if(url.indexOf('user') !== false && url.indexOf('login') !== false || url == '') {
+//						window.location.href = 'User/index';
+//					}
+//					window.location.href = res.url;
+				} else {
+					showErrorMsg(res.msg);
+					if(codeExist) {
+						verify();
+					} else {
+						location.reload();
+					}
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				showErrorMsg('网络失败，请刷新页面后重试');
+			}
+		})
+    }
+
+    //切换密码框的状态
+    $(function () {
+        $('.loginsingup-input .lsu i').click(function () {
+            $(this).toggleClass('eye');
+            if ($(this).hasClass('eye')) {
+                $(this).siblings('input').attr('type', 'text')
+            } else {
+                $(this).siblings('input').attr('type', 'password')
+            }
+        });
+    })
+</script>
+</body>
+
+</html>
+
+<style>
+    .lsu{
+        position: relative;
+    }
+    .reg-icon{
+        width: .8rem;
+        height:.8rem;
+        position: absolute;
+        top:.9rem;
+        left:0;
+    }
+</style>

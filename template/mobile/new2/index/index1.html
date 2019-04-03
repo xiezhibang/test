@@ -1,0 +1,417 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+    <!--<meta charset="utf-8"/>-->
+    <!--<title>首页-{$tpshop_config['shop_info_store_title']}</title>-->
+    <!--<link rel="stylesheet" href="__STATIC__/css/style.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css"/>-->
+    <!--<script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>-->
+    <!--&lt;!&ndash;<script src="__STATIC__/js/zepto-1.2.0-min.js" type="text/javascript" charset="utf-8"></script>&ndash;&gt;-->
+    <!--<script src="__STATIC__/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>-->
+    <!--<script src="__STATIC__/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>-->
+    <!--<script src="__PUBLIC__/js/global.js"></script>-->
+    <!--<script src="__STATIC__/js/layer.js" type="text/javascript"></script>-->
+    <!--<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" media="screen"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="__STATIC__/css/idangerous.swiper.css"/>-->
+<!--</head>-->
+<include file="public/header" title="首页"/>
+<style type="text/css">
+    .preloader {
+        position: absolute;
+        left: 0;
+        top: -100px;
+        z-index: 0;
+        color: #fff;
+        text-align: center;
+        line-height: 100px;
+        height: 100px;
+        width: 100%;
+        opacity: 0;
+        font-size: 25px;
+        -webkit-transition: 300ms;
+        -moz-transition: 300ms;
+        -ms-transition: 300ms;
+        -o-transition: 300ms;
+        transition: 300ms;
+        background: #c60081;
+    }
+    .goods-description .meq {
+        position: absolute;
+        left: 100%;
+        -webkit-animation: marquee 20s linear infinite;
+        -moz-animation: marquee 20s linear infinite;
+        -ms-animation: marquee 20s linear infinite;
+        -o-animation: marquee 20s linear infinite;
+        animation: marquee 20s linear infinite;
+        animation-delay:10s;
+    }
+
+    .preloader.visible {
+        top: 0;
+        opacity: 1;
+        margin-top: 1.6rem;
+    }
+
+    .goodsList-data {
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .goodsList-datas {
+        margin: 0 .21333rem .4rem !important;
+    }
+
+    /* Safari 和 Chrome */
+    @-webkit-keyframes marquee {
+        from {
+            left: 100%;
+        }
+        to {
+            left: -150%;
+        }
+    }
+
+    /* Firefox */
+    @-moz-keyframes marquee {
+        from {
+            left: 100%;
+        }
+        to {
+            left: -150%;
+        }
+    }
+
+    @-ms-keyframes marquee {
+        0% {
+            left: 100%;
+        }
+        100% {
+            left: -150%;
+        }
+    }
+
+    /* Opera */
+    @-o-keyframes marquee {
+        from {
+            left: 100%;
+        }
+        to {
+            left: -150%;
+        }
+    }
+
+    @keyframes marquee {
+        from {
+            left: 100%
+        }
+        to {
+            left: -150%
+        }
+    }
+
+    .goods-description {
+        overflow: hidden;
+        position: relative;
+        height:100%;
+    }
+
+    .goods-description span {
+        position: absolute;
+        -webkit-animation: marquee 20s linear infinite;
+        -moz-animation: marquee 20s linear infinite;
+        -ms-animation: marquee 20s linear infinite;
+        -o-animation: marquee 20s linear infinite;
+        animation: marquee 20s linear infinite;
+    }
+</style>
+<!--顶部搜索栏-s-->
+<header style="background: #c60081;position: fixed;top: 0;left: 0;width: 100%;z-index: 99999;">
+    <div class="clearfix index-header">
+        <div class="fl index-header-logo">
+        <img src="__STATIC__/images/logo.png"/>
+    </div>
+        <div class="index-header-so fl">
+            <a href="{:U('Goods/ajaxSearch')}">
+                搜索美妆
+            </a>
+        </div>
+        <!--<div class="fr index-header-dian">-->
+        <!--<img src="__STATIC__/images/dian.png"/>-->
+        <!--</div>-->
+    </div>
+</header>
+<!--顶部搜索栏-e-->
+
+<!--顶部滚动广告栏-s-->
+<div class="example" style="margin-top: 1.8rem;overflow: hidden">
+    <div class="ft-carousel" id="slideTpshop" style="height: 7.5rem">
+        <ul class="carousel-inner">
+            <!--广告表-->
+            <adv pid="2" limit="4" item="v">
+                <li class="carousel-item">
+                    <a href="{$v.ad_link}">
+                        <img src="{$v.ad_code}" title="{$v[title]}" style="{$v[style]}" alt="">
+                    </a>
+                </li>
+            </adv>
+        </ul>
+    </div>
+    <script>
+        $("#slideTpshop").FtCarousel();
+    </script>
+</div>
+<!--顶部滚动广告栏-e-->
+<!--搜索-->
+<div class="sous">
+    <ul class="index-zhuan p">
+        <a style="margin: 2%;" href="{:U('Member/vipGoodsList')}">
+            <img width="46%" src="__STATIC__/images/mei1.jpg"/>
+        </a>
+        <a style="margin: 1%" href="{:U('Member/goodsList')}">
+            <img width="46%" src="__STATIC__/images/mei2.jpg"/>
+        </a>
+    </ul>
+</div>
+<div class="sous-text" id="sousText">
+    <!--<marquee  scrolldelay="10"><span style="">美桐荟美妆新领售：大牌原料，国家备案，专业导师和服务商线上线下贴心辅导。</span></marquee>-->
+    <p class="goods-description">
+        <span>美桐荟美妆新领售：大牌原料，国家备案，专业导师和服务商线上线下贴心辅导。</span>
+        <span class="meq">美桐荟美妆新领售：大牌原料，国家备案，专业导师和服务商线上线下贴心辅导。</span>
+    </p>
+</div>
+<div class="index-tui">
+    <img onclick="appShare()" src="__STATIC__/images/tui.png"/>
+</div>
+<!--猜您喜欢-start-->
+<div class="index-dao">
+    <p id="ajaxGoods" style="text-align: center;font-size: .7rem;" onclick="ajaxGetMore(this.false)">单品推荐</p>
+    <!--<ul class="clearfix">-->
+        <!--<li class="fl index-dao-act" onclick="ajaxGetMore(this,false)">综合</li>-->
+        <!--<li class="fl" onclick="ajaxGetMore(this,'is_new')">新品</li>-->
+        <!--<li class="fl" onclick="ajaxGetMore(this,'sales_sum')">销量</li>-->
+        <!--<li class="fl" onclick="ajaxGetMore(this,'shop_price','asc')">价格</li>-->
+    <!--</ul>-->
+</div>
+<div class="mei-ul">
+    <ul id="shengji_list" style="line-height: normal">
+    </ul>
+</div>
+<div id="goods_list" style="background: #f5f5f5;padding:.2rem;" class="addimgchan clearfix">
+</div><!--猜您喜欢-end-->
+
+<!--底部导航-start-->
+<include file="public/footer_nav"/>
+<!--底部导航-end-->
+
+<script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/js/sourch_submit.js"></script>
+<script type="text/javascript">
+
+    $.ajax({
+        type: "get",
+        data: {p: 0},
+        url: "{:url('member/ajaxGetMore')}",
+        success: function (data) {
+            if (data) {
+                $("#shengji_list").append(data);
+                before_request = 1;
+            } else {
+                $('.get_more').hide();
+            }
+        }
+    });
+
+    /**
+     * 秒杀模块倒计时
+     * */
+    function GetRTime(end_time) {
+        var NowTime = new Date();
+        var t = (end_time * 1000) - NowTime.getTime();
+        var d = Math.floor(t / 1000 / 60 / 60 / 24);
+        var h = Math.floor(t / 1000 / 60 / 60 % 24);
+        var m = Math.floor(t / 1000 / 60 % 60);
+        var s = Math.floor(t / 1000 % 60);
+        if (s >= 0)
+            return (d * 24 + h) + '时' + m + '分' + s + '秒';
+    }
+    function GetRTime2() {
+        var text = GetRTime('{$end_time}');
+        if (text == 0) {
+            $(".hms").text('活动已结束');
+        } else {
+            $(".hms").text(text);
+        }
+    }
+    setInterval(GetRTime2, 1000);
+
+    /**
+     * 继续加载猜您喜欢
+     * */
+    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+    var page = 1;
+
+    function ajaxGetMore(e, key, item) {
+//        $(e).r.css('color','#c60081');
+        getData = {p: page};
+
+        if (key) getData.sort = key;
+        if (item) getData.sort_asc = item;
+
+        $.ajax({
+            type: "get",
+            data: getData,
+            url: "{:url('ajaxGetMore')}",
+            success: function (data) {
+                if (data) {
+                    $("#goods_list").empty().append(data);
+                    before_request = 1;
+                } else {
+                    $('.get_more').hide();
+                }
+            }
+        });
+
+        $(e).siblings().removeClass('index-dao-act');
+        $(e).addClass('index-dao-act');
+    }
+    $('#ajaxGoods').click();
+
+    function ajax_sourch_submit() {
+        if (before_request == 0) // 上一次请求没回来 不进行下一次请求
+            return false;
+        before_request = 0;
+        page++;
+        getData = {p: page};
+
+        $.ajax({
+            type: "get",
+            data: getData,
+            url: "{:url('ajaxGetMore')}",
+            success: function (data) {
+                if (data) {
+                    $("#goods_list").append(data);
+                    before_request = 1;
+                } else {
+                    $('.get_more').hide();
+                }
+            }
+        });
+    }
+
+    //滚动加载更多
+    $(window).scroll(
+        function() {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight == scrollHeight) {
+                ajax_sourch_submit();//调用加载更多
+            }
+        }
+    );
+</script>
+</body>
+
+</html>
+<style type="text/css">
+
+
+    .index-zhuan li {
+        width: 30%;
+    }
+
+    .index-zhuan li img {
+        width: 100%;
+    }
+
+    .index-zhuan li:nth-child(2) {
+        margin: 0 5%;
+    }
+
+    .clearfix:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    .index-header {
+        padding: 0 .4rem;
+    }
+
+    .index-header-logo {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1rem;
+    }
+
+    .index-header-logo img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .index-header-so {
+        width: 80%;
+        margin: 0 auto;
+        height: 1.2rem;
+        border: none;
+        background: #fff;
+        border-radius: 35px;
+        overflow: hidden;
+    }
+
+    .index-header-so a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: url("__STATIC__/images/c23.png") no-repeat;
+        background-size: .6rem;
+        background-position: .4rem center;
+        padding-left: 1.2rem;
+        text-align: left;
+        line-height: 1.2rem;
+        font-size: .5rem;
+        color: #666;
+    }
+
+    .index-header-dian {
+        width: .25rem;
+        height: 1rem;
+
+    }
+
+    .index-header-dian img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .likeshop {
+        padding: 0 .4rem;
+    }
+
+    .products_kuang a {
+        display: block;
+        width: 100%;
+    }
+
+    .products_kuang a img {
+        width: 100% !important;
+    }
+
+    .similar-product-price {
+        width: auto !important;
+    }
+
+    .mslide {
+        height: 7.5rem;
+    }
+
+    .mslide img {
+        height: 7.5rem !important;
+    }
+</style>

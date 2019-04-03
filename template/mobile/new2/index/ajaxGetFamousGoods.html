@@ -1,0 +1,36 @@
+<notempty name="favourite_goods">
+    <foreach name="favourite_goods" item="v">
+        <div class="orderlistshpop p addimgchan">
+            <div class="maleri30 goodsList-datas ">
+                <a href="{:U('Mobile/Member/famous_goods_info',array('id'=>$v[goods_id]))}" title="{$v.goods_name}" class="item">
+                    <div class="sc_list se_sclist goodsList-data">
+                        <div class="shopimg fl">
+                            <img src="{$v[goods_id]|goods_thum_images=400,400}">
+                        </div>
+                        <div class="deleshow fr" style="padding: 0 .25rem;">
+                            <div class="deletes">
+                                <span style="color:black;text-overflow: ellipsis;-o-text-overflow: ellipsis;white-space:nowrap;" class="similar-product-text fl goodsList-data-text">{$v[goods_name]|getSubstr=0,20}</span>
+                            </div>
+                            <div class="clearfix" style="margin: .15rem 0;">
+                                <div class="prices goodsList-data-prices">
+                                    <p class="sc_pri"><span style="color: #666">名品额度: ￥{$v[market_price]}元</span></p>
+                                </div>
+                            </div>
+                            <p class="goodsList-data-money clearfix">
+                                <!--<span class="fl" style="text-decoration:line-through;">零售价￥0元</span>-->
+                                <span class="fl">综合运费<span style="color: #f23030">￥{$v[shop_price]}</span></span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </foreach>
+    <else/>
+
+    <!--没有结果-s-->
+    <div class="comment_con p">
+        <div class="none"><img src="__STATIC__/images/none.png"><br><br>亲，没有更多结果了~</div>
+    </div>
+    <!--没有结果-e-->
+</notempty>

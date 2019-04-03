@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/distribut/css/main.css"/>
+    <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css"/>
+    <style type="text/css">
+        .preloader {
+            position: absolute;
+            left: 0;
+            top: -100px;
+            z-index: 0;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+            height: 100px;
+            width: 100%;
+            opacity: 0;
+            font-size: 25px;
+            -webkit-transition: 300ms;
+            -moz-transition: 300ms;
+            -ms-transition: 300ms;
+            -o-transition: 300ms;
+            transition: 300ms;
+            background: #c60081;
+        }
+
+        .preloader.visible {
+            top: 0;
+            opacity: 1;
+            margin-top: 1.6rem;
+        }
+
+        .goodsList-data {
+            padding: 0 !important;
+            margin: 0 !important;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .goodsList-datas {
+            margin: 0 .21333rem .4rem !important;
+        }
+
+
+    </style>
+    <style type="text/css">
+
+
+        .index-zhuan li {
+            width: 30%;
+        }
+
+        .index-zhuan li img {
+            width: 100%;
+        }
+
+        .index-zhuan li:nth-child(2) {
+            margin: 0 5%;
+        }
+
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+
+        .index-header {
+            padding: 0 .4rem;
+        }
+
+        .index-header-logo {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 1rem;
+        }
+
+        .index-header-logo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .index-header-so {
+            width: 80%;
+            margin: 0 auto;
+            height: 1rem;
+            border: none;
+            background: #fff;
+            border-radius: 35px;
+            overflow: hidden;
+        }
+
+        .index-header-so a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: url("__STATIC__/images/c23.png") no-repeat;
+            background-size: .6rem;
+            background-position: .2rem center;
+            padding-left: 1.2rem;
+            text-align: left;
+            line-height: 1rem;
+            font-size: .5rem;
+        }
+
+        .index-header-dian {
+            width: .25rem;
+            height: 1rem;
+
+        }
+
+        .index-header-dian img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .likeshop {
+            padding: 0 .4rem;
+        }
+
+        .products_kuang a {
+            display: block;
+            width: 100%;
+        }
+
+        .products_kuang a img {
+            width: 100% !important;
+        }
+
+        .similar-product-price {
+            width: auto !important;
+        }
+
+        .mslide {
+            height: 7.5rem;
+        }
+
+        .mslide img {
+            height: 7.5rem !important;
+        }
+    </style>
+</head>
+<body class="bag_gray2">
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return">
+            <a href="javascript:window.history.go(-1)"><img src="__STATIC__/images/return.png" alt="返回"></a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>{$title|default="我"}的社群 <if condition="!empty($count_find)">({$count_find})</if></span>
+        </div>
+    </div>
+</div>
+<div class="classreturn loginsignup ">
+    <div class="content content_ul">
+        <div style="width: 33%;float: left;" class="ds-in-bl search center" onclick="distributorLevel(0,this)">
+            <span>社群成员({$count_child.level0})</span>
+        </div>
+        <div style="width: 33%;float: left;" class="ds-in-bl search center" onclick="distributorLevel(1,this)">
+            <span>行政服务商({$count_child.level1})</span>
+        </div>
+        <div style="width: 33%;float: left;" class="ds-in-bl search center" onclick="distributorLevel(2,this)">
+            <span>白金服务商({$count_child.level2})</span>
+        </div>
+    </div>
+</div>
+<div id="ajax_return">
+</div>
+<!--没有内容时-s-->
+<!--<div class="comment_con p">-->
+<!--<div style="padding:1rem;text-align: center;font-size: .59733rem;color: #777777;"><img-->
+<!--src="__STATIC__/images/none.png"/><br/><br/>亲，您还没有分享会员！-->
+<!--</div>-->
+<!--</div>-->
+<!--没有内容时-e-->
+<script type="text/javascript" src="__STATIC__/js/sourch_submit.js"></script>
+<script type="text/javascript">
+
+    function distributorLevel(i, e) {
+        type = i;
+        page = 0;
+
+        $(e).siblings().css("color", "#000");
+        $(e).css("color", "#c60081");
+
+        $("#ajax_return").empty();
+        ajax_sourch_submit();
+    }
+
+    $('.content_ul').children().eq({$lower_type|default=0}).click();
+
+    /*** ajax 提交表单 查询订单列表结果*/
+    function ajax_sourch_submit() {
+        page += 1;
+        $.ajax({
+            type: "GET",
+            url: "/index.php?m=Mobile&c=Distribut&a=ajax_lower_list&user_id=" + {$user_id} + "&p=" + page + "&type=" + type,//+tab,
+//            data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+            success: function (data) {
+                // if ($.trim(data) == '')
+                //     $('#getmore').hide();
+                // else {
+                $("#ajax_return").append(data);
+                // }
+
+                // $('.content_ul').children().eq(divI).click();
+            }
+        });
+    }
+</script>
+</body>
+</html>

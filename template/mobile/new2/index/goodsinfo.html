@@ -1,0 +1,177 @@
+<include file="public/header" title="商品详情" body=""/>
+<div class="he_sustain" style="position: fixed;top: 0;left: 0;width: 100%;">
+    <div class="classreturn loginsignup detail">
+        <div class="content">
+            <div class="ds-in-bl return">
+                <a href="javascript:history.back(-1)"><img src="__STATIC__/images/return.png" alt="返回"></a>
+            </div>
+            <div class="ds-in-bl search center">
+                <span>详情</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--顶部隐藏菜单-s-->
+<include file="public/top_nav"/>
+<!--顶部隐藏菜单-e-->
+<!--商品抢购 start-->
+<!--商品s-->
+<div class="xq_details" style="margin-top: 1.87733rem;">
+    <div class="banner ban1 detailban">
+        <div class="mslide mslide-img" id="slideTpshop">
+            <ul>
+                <!--图片-s-->
+                <foreach name="goods_images_list" item="pic">
+                    <li><a href="javascript:void(0)"><img src="{$pic[image_url]}" alt=""></a></li>
+                </foreach>
+                <!--图片-e-->
+            </ul>
+
+        </div>
+        <div class="mslide-conrent">
+            <span class="mslide-conrent-money">会员价￥0</span>
+            <span>市场价￥{$goods.market_price}</span>
+            <!--<span class="mslide-conrent-money">￥339.00</span><span>会员价￥275.00</span>-->
+        </div>
+    </div>
+    <div class="goodsInfo-content ">
+        <div class="clearfix">
+            <div class="fl goodsInfo-content-l">
+                {$goods.goods_name}
+            </div>
+            <!--<div onclick="appShare()" class="fr goodsInfo-content-r">-->
+                <!--<i class="goodsInfo-content-r-icon"></i>-->
+                <!--<p>分享有礼</p>-->
+            <!--</div>-->
+        </div>
+        <div class="clearfix goodsInfo-content-text">
+            <span class="fl">综合运费：</span><span class="fl font_color">￥{$goods.shop_price}</span>
+            <span class="fl">库存{$goods.store_count}件</span>
+            <span class="fr">{$goods.sales_sum}人已买</span>
+        </div>
+    </div>
+    <div class="goodsInfo-data">
+        <if condition="$good['is_recommend'] eq 1"><span class="goodsInfo-data-icon">推荐</span></if>
+        {$goods.goods_remark}
+    </div>
+    <div class="goodsInfo-datas">
+        <p class="goodsInfo-datas-title">
+            商品详情
+        </p>
+        <style>
+            #goodsContent p img {
+                width: 100%;
+            }
+        </style>
+        <div id="goodsContent">
+            {$goods.goods_content|htmlspecialchars_decode}
+        </div>
+    </div>
+    <!--添加购物车JS-->
+    <script src="__PUBLIC__/js/mobile_common.js" type="text/javascript" charset="utf-8"></script>
+</div>
+<!--商品-e-->
+
+<!--底部按钮-s-->
+<div class="podee">
+    <div class="cart-concert-btm p">
+        <div class="fl">
+           	<span class="goodsInfo-money">
+           		会员价￥0
+           	</span>
+        </div>
+        <div class="fr goodsInfo-cart">
+
+            <!--<a style="display:block;" href="javascript:void(0);" onclick="AjaxAddCart({$goods.goods_id},1,1);">立即领取</a>-->
+
+            <ul class="clearfix">
+                <li class="">
+                    <span style="color:#888888 ;font-size: .6rem;line-height:2.1rem;">综合运费￥{$goods.shop_price}</span>
+                    <!--<a class="pb_plusshopcar button active_button " href="javascript :void(0);"-->
+                    <!--onClick="AjaxAddCart({$goods.goods_id},1,0);"> 加入购物车</a>-->
+                </li>
+                <li class="r" style="margin-top: .3rem">
+                    <a style="display:block;" href="javascript:void(0);" onclick="AjaxAddVipCart({$goods.goods_id},1);">立即领取</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!--弹窗-->
+<div id="notVip"
+     style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <p>您还不是美亲VIP会员，请在首页点开“升级VIP”商城任意选购一款产品，立即成为VIP会员，享有VIP美妆任领福利，以及分享和自购获得的更多惊喜和乐趣！</p>
+
+        <br/>
+        <p onclick="javascript:window.location.href='{:url('viphtml')}'"
+           style="text-align: center;text-decoration:underline;color: #c60081">现在升级VIP，点击进入！</p>
+    </div>
+</div>
+<!--底部按钮-e-->
+<style>
+    /*.podee .cart-concert-btm .fr{*/
+    /*width: 30%;*/
+    /*}*/
+    .podee .cart-concert-btm .fl {
+        width: 35%;
+    }
+
+    .podee .cart-concert-btm .fr {
+        width: 65%;
+    }
+
+    .goodsInfo-cart {
+        margin-top: 0;
+    }
+</style>
+<script type="text/javascript">
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    })
+    /**
+     * addcart 将商品加入购物车
+     * @goods_id  商品id
+     * @num   商品数量
+     * @form_id  商品详情页所在的 form表单
+     * @to_catr 加入购物车后再跳转到 购物车页面 默认不跳转 1 为跳转
+     * layer弹窗插件请参考http://layer.layui.com/mobile/
+     */
+    var is_vip = '{$user.is_vip}';
+    function AjaxAddVipCart(goods_id, num) {
+        if (is_vip === '1') {
+            $.ajax({
+                type: "POST",
+                url: "/index.php?m=Mobile&c=Cart&a=ajaxAddCart",
+                data: {goods_id: goods_id, goods_num: num},
+                dataType: 'json',
+                success: function (data) {
+                    layer.open({content: data.msg, time: 3});
+                    if (data.status === 1) {
+//                        tp_cart_info = $('#tp_cart_info');
+//                        cart_num = parseInt(tp_cart_info.html()) + parseInt(num);
+//                        tp_cart_info.html(cart_num);
+                        window.location.href = "/index.php?m=Mobile&c=Cart&a=cart";
+                        return false;
+                    }else{
+                        location.reload();
+                        return false;
+                    }
+                }
+            });
+        } else {
+            $('#notVip').show();
+//            shareUrl = "{:url('user/login')}";
+//            window.location.href = shareUrl;
+//            console.log(shareUrl);
+        }
+    }
+</script>

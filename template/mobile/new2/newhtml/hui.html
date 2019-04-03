@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>美妆福利-美桐荟</title>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/distribut/css/main.css"/>
+        <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="__STATIC__/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css" />
+		<style>
+			.hui-text{
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="classreturn loginsignup " style="position: fixed;width: 100%;top: 0;left: 0;">
+		    <div class="content">
+		        <div class="ds-in-bl return">
+		            <a onclick="javascript:history.back(-1);"><img src="__STATIC__/images/return.png" alt="返回"></a onclick="javascript:history.back(-1);">
+		        </div>
+		        <div class="ds-in-bl search center">
+		            <span>美妆福利</span>
+		        </div>
+		    </div>
+		</div>
+		<div class="hui-text" style="margin-top: 1.9rem">
+			美桐荟提示：您还不是美亲VIP会员，现在只需39.9元购买MICC社群营销线上课程（原价980元），可立即成为美桐荟美亲VIP会员，享有任领产品和分享好友等更多特权与乐趣！
+		</div>
+		<div class="hui-content">
+			<p class="hui-content-title">
+				美桐荟MICC社群营销
+			</p>
+			<div class="hui-content-img">
+				<img src="__STATIC__/images/vip-card.jpg" style="width: 100%;height: 100%;"/>
+			</div>
+			<p class="hui-text" style="color: #000;">MICC社群营销基本功课程内容提要；</p>
+			<p class="hui-text" style="color: #000;">1.什么是互联网社群？</p>
+			<p class="hui-text" style="color: #000;">2.如何管理和运营微信群和朋友圈？</p>
+			<p class="hui-text" style="color: #000;">3.美桐荟粉丝模型和粉丝路线？</p>
+			<p class="hui-text" style="color: #000;">4.如何让弱关系用户成为强关系忠实粉丝？</p>
+			<p class="hui-text" style="color: #000;">5.美桐荟新领售的商业内涵？</p>
+			<p class="hui-text" style="color: #000;">6.美桐荟服务商竞聘规则与收益机制。</p>
+		</div>
+		<!--其他支付方式-s-->
+		<div class="paylist" style="margin-bottom: 2rem">
+			<div class="myorder debit otherpay p">
+				<div class="content30">
+					<a href="javascript:void(0);">
+						<div class="order">
+							<div class="fl">
+								<span>支付方式</span>
+							</div>
+							<div class="fr">
+								<!--<i class="Mright xjt"></i>-->
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<form action="{:U('paying')}" method="post" name="cart4_form" id="cart4_form">
+			<div class="pay-list-4 p">
+				<div class="maleri30">
+					<ul>
+						<foreach name="paymentList" key="k" item="v">
+							<li  onClick="changepay(this);">
+								<label>
+									<div class="radio fl">
+								<span class="che {$k}">
+									<i>
+										<input type="radio"   value="pay_code={$v['code']}" class="c_checkbox_t" name="pay_radio" style="display:none;"/>
+									</i>
+								</span>
+									</div>
+									<div class="pay-list-img fl">
+										<img src="/plugins/{$v['type']}/{$v['code']}/{$v['icon']}"/>
+									</div>
+									<div class="pay-list-font fl">
+										{$v[name]}
+									</div>
+								</label>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			</form>
+		</div>
+		<div class="hui-foot">
+			<div class="hui-foot-content" onclick="pay()">
+				开通会员￥{:tpCache('distribut.vip_price')}
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				//默认选中第一个
+				$('.pay-list-4 div ul li:first').find('.che').addClass('check_t')
+					.end().find(':radio').attr('checked',true);
+			})
+			//切换支付方式
+			function changepay(obj){
+				$(obj).find('.che').addClass('check_t').parents('li').siblings('li').find('.che').removeClass('check_t');
+				//改变中状态
+				if($(obj).find('.che').hasClass('check_t')){
+					//选中
+					$(obj).find(':radio').attr('checked',true);
+					$(obj).siblings('li').find(':radio').removeAttr('checked');
+				}else{
+					//取消选中
+					$(obj).find(':radio').removeAttr('checked');
+				}
+
+			}
+			function pay(){
+				$('#cart4_form').submit();
+				return;
+				//微信JS支付
+			}
+		</script>
+	</body>
+</html>

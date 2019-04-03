@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/index.css?v=1.3" />
+		<link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css" />
+		<link rel="stylesheet" href="__STATIC__/css/ft-carousel.css">
+		<script src="__STATIC__/js/layer.js"  type="text/javascript" ></script>
+		<script src="__STATIC__/js/ft-carousel.min.js"  type="text/javascript" ></script>
+		<style type="text/css">
+			article,
+			aside,
+			details,
+			figcaption,
+			figure,
+			footer,
+			header,
+			hgroup,
+			main,
+			nav,
+			section,
+			summary {
+				display: block
+			}
+
+			audio,
+			canvas,
+			progress,
+			video {
+				display: inline-block;
+				vertical-align: baseline
+			}
+
+			audio:not([controls]) {
+				display: none;
+				height: 0
+			}
+
+			[hidden],
+			template {
+				display: none
+			}
+
+
+			/*! normalize.css v3.0.0 | Base | MIT License | git.io/normalize */
+
+			html {
+				font-family: sans-serif;
+				-webkit-text-size-adjust: 100%;
+				-ms-text-size-adjust: 100%
+			}
+
+			body {
+				margin: 0;
+				font-family: "微软雅黑" !important;
+			}
+
+
+			/*! normalize.css v3.0.0 | Links | MIT License | git.io/normalize */
+
+			a {
+				background: transparent
+			}
+
+			a:active,
+			a:hover {
+				outline: 0
+			}
+
+
+			/*! normalize.css v3.0.0 | Typography | MIT License | git.io/normalize */
+
+			abbr[title] {
+				border-bottom: 1px dotted
+			}
+
+			b,
+			strong {
+				font-weight: bold
+			}
+
+			dfn {
+				font-style: italic
+			}
+
+			h1 {
+				font-size: 2em;
+				margin: 0.67em 0
+			}
+
+			mark {
+				background: #ff0;
+				color: #000
+			}
+
+			small {
+				font-size: 80%
+			}
+
+			sub,
+			sup {
+				font-size: 75%;
+				line-height: 0;
+				position: relative;
+				vertical-align: baseline
+			}
+
+			sup {
+				top: -0.5em
+			}
+
+			sub {
+				bottom: -0.25em
+			}
+
+
+			/*! normalize.css v3.0.0 | Embedded Content | MIT License | git.io/normalize */
+
+			img {
+				border: 0
+			}
+
+			svg:not(:root) {
+				overflow: hidden
+			}
+
+
+			/*! normalize.css v3.0.0 | Figures | MIT License | git.io/normalize */
+
+			figure {
+				margin: 1em 40px
+			}
+
+			hr {
+				-moz-box-sizing: content-box;
+				box-sizing: content-box;
+				height: 0
+			}
+
+			pre {
+				overflow: auto
+			}
+
+			code,
+			kbd,
+			pre,
+			samp {
+				font-family: monospace, monospace;
+				font-size: 1em
+			}
+
+
+			/*! normalize.css v3.0.0 | Forms | MIT License | git.io/normalize */
+
+			button,
+			input,
+			optgroup,
+			select,
+			textarea {
+				color: inherit;
+				font: inherit;
+				margin: 0
+			}
+
+			button {
+				overflow: visible
+			}
+
+			button,
+			select {
+				text-transform: none
+			}
+
+			button,
+			html input[type="button"],
+			input[type="reset"],
+			input[type="submit"] {
+				-webkit-appearance: button;
+				cursor: pointer
+			}
+
+			button[disabled],
+			html input[disabled] {
+				cursor: default
+			}
+
+			button::-moz-focus-inner,
+			input::-moz-focus-inner {
+				border: 0;
+				padding: 0
+			}
+
+			input {
+				line-height: normal
+			}
+
+			input[type="checkbox"],
+			input[type="radio"] {
+				box-sizing: border-box;
+				padding: 0
+			}
+
+			input[type="number"]::-webkit-inner-spin-button,
+			input[type="number"]::-webkit-outer-spin-button {
+				height: auto
+			}
+
+			input[type="search"] {
+				-webkit-appearance: textfield;
+				-moz-box-sizing: content-box;
+				-webkit-box-sizing: content-box;
+				box-sizing: content-box
+			}
+
+			input[type="search"]::-webkit-search-cancel-button,
+			input[type="search"]::-webkit-search-decoration {
+				-webkit-appearance: none
+			}
+
+			fieldset {
+				border: 1px solid #c0c0c0;
+				margin: 0 2px;
+				padding: 0.35em 0.625em 0.75em
+			}
+
+			legend {
+				border: 0;
+				padding: 0
+			}
+
+			textarea {
+				overflow: auto
+			}
+
+			optgroup {
+				font-weight: bold
+			}
+
+
+			/*! normalize.css v3.0.0 | Tables | MIT License | git.io/normalize */
+
+			table {
+				border-collapse: collapse;
+				border-spacing: 0
+			}
+
+			td,
+			th {
+				padding: 0
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-text-size-adjust: none;
+				-webkit-tap-highlight-color: transparent
+			}
+
+			input:-webkit-autofill {
+				-webkit-box-shadow: 0 0 0px 1000px white inset
+			}
+
+			ul,
+			li {
+				list-style: none
+			}
+			a {
+				color: #232326;
+				text-decoration: none;
+				vertical-align: middle
+			}
+
+			i,
+			em {
+				font-style: normal
+			}
+
+            .clearfix {
+                zoom: 1;
+            }
+            .clearfix:after,
+            .clearfix:before {
+                display: block;
+                overflow: hidden;
+                height: 0;
+                content: '\0020';
+            }
+            .clearfix:after {
+                clear: both;
+            }
+            .fl {
+                float: left;
+            }
+            .fr {
+                float: right;
+            }
+            .goodsList-data-text{
+                margin-top: .3rem !important;
+                margin-bottom: .2rem;
+                font-size: .6rem;
+            }
+            .goodsList-data-prices{
+                margin-bottom: .3rem !important;
+            }
+            .goodsList-data-money{
+                font-size: .45rem;
+                margin-bottom: .2rem;
+                color:#666;
+            }
+            .sc_list {
+                padding: .21333rem .64rem;
+                overflow: hidden;
+                border-bottom: 1px solid #f8f8f8;
+                background: #fff;
+                margin: 0 -.64rem;
+            }
+
+            .sc_list .radio {
+                width: inherit;
+                padding-top: 1.3rem;
+                margin-right: .42667rem
+            }
+
+            .sc_list .shopimg img {
+                width:2.2rem;
+                height: 2.2rem
+            }
+
+            .sc_list .deleshow {
+                width: 10.8rem
+            }
+
+            .sc_list .deleshow .deletes {
+                overflow: hidden;
+                clear: both
+            }
+
+            .sc_list .deleshow .deletes .similar-product-text {
+                width: 7.89333rem;
+                padding: 0
+            }
+
+            .sc_list .deleshow .deletes a.delescj {
+                float: right
+            }
+
+            .sc_list .deleshow .deletes a.delescj img {
+                margin-top: .256rem;
+                width: .72533rem;
+                height: .72533rem
+            }
+
+            .sc_list .deleshow .weight {
+                /*font-size: .55467rem;*/
+                font-size: .42rem;
+                color: #999999
+            }
+
+            .sc_list .deleshow .prices {
+                overflow: hidden;
+                margin-top: .21333rem
+            }
+
+            .sc_list .deleshow .prices .sc_pri {
+                color: #f23030;
+                font-size: .59733rem;
+                margin-top: .21333rem
+            }
+            .se_sclist .deleshow {
+                width: 10.51733rem;
+                position: relative
+            }
+
+            .se_sclist .deleshow .deletes .similar-product-text {
+                width: 10.51733rem
+            }
+
+            .se_sclist .deleshow .prices {
+                margin-top: 0;
+                margin-bottom: .42667rem
+            }
+
+            .se_sclist .deleshow .prices .sc_pri {
+                margin-top: 0
+            }
+
+            .se_sclist .deleshow .prices .sc_pri .cobl {
+                color: #999999
+            }
+            .addimgchan .orderlistshpop {
+                width: 45%;
+                float: left;
+                margin:2.5%;
+            }
+
+            .addimgchan .maleri30 {
+                margin: 0 .21333rem
+            }
+
+            .addimgchan .se_sclist .shopimg {
+                float: none;
+                text-align: center
+            }
+
+            .addimgchan .se_sclist .shopimg img {
+                width: 100%;
+                height: auto
+            }
+
+            .addimgchan .se_sclist .deleshow {
+                width: 100%
+            }
+
+            .addimgchan .se_sclist .deleshow .deletes .similar-product-text {
+                width: 100%
+            }
+
+            .addimgchan .se_sclist .deleshow .prices {
+                float: left
+            }
+
+            .addimgchan .se_sclist .deleshow .weight {
+                float: right
+            }
+            .index-dao{
+                width: 100%;
+                height: 1.5rem;
+                background: #fff;
+                margin-bottom: .5rem;
+                line-height: 1.5rem;
+                font-size: .6rem;
+                color: #8f8f8f;
+            }
+            .index-dao li{
+                width: 25%;
+                text-align: center;
+            }
+            .index-dao .index-dao-act{
+                color: #000;
+            }
+			.sous-text{
+				width: 90%;
+				margin: 0 auto;
+				height: 1.6rem;
+				background: url("__STATIC__/images/c1.png") no-repeat;
+				background-size: .9rem;
+				background-position: .3rem center;
+				border-radius: 35px;
+				border: 1px #e5e5e5 solid;
+				margin-top: .4rem;
+				margin-bottom: .2rem;
+				line-height: 1.16rem;
+				font-size: .45rem;
+				color: #c60081;
+				padding-left: 1rem;
+			}
+			.index-dao{
+				width: 100%;
+				height: 1.5rem;
+				background: #fff;
+				margin-bottom: .5rem;
+				line-height: 1.5rem;
+				font-size: .6rem;
+				color: #8f8f8f;
+			}
+			.index-dao li{
+				width: 25%;
+				text-align: center;
+			}
+			.index-dao .index-dao-act{
+				color: #000;
+			}
+			/* Safari 和 Chrome */
+			@-webkit-keyframes marquee {
+				from {
+					left: 100%;
+				}
+				to {
+					left: -150%;
+				}
+			}
+
+			/* Firefox */
+			@-moz-keyframes marquee {
+				from {
+					left: 100%;
+				}
+				to {
+					left: -150%;
+				}
+			}
+
+			@-ms-keyframes marquee {
+				0% {
+					left: 100%;
+				}
+				100% {
+					left: -150%;
+				}
+			}
+
+			/* Opera */
+			@-o-keyframes marquee {
+				from {
+					left: 100%;
+				}
+				to {
+					left: -150%;
+				}
+			}
+
+			@keyframes marquee {
+				from {
+					left: 100%
+				}
+				to {
+					left: -150%
+				}
+			}
+			.goods-description {
+				overflow: hidden;
+				position: relative;
+				height:80%;
+				margin-top: .5%;
+				width: 128%;
+			}
+
+			.goods-description .meq {
+				left: 100%;
+				animation-delay:10s;
+			}
+
+			.goods-description span {
+				position: absolute;
+				-webkit-animation: marquee 20s linear infinite;
+				-moz-animation: marquee 20s linear infinite;
+				-ms-animation: marquee 20s linear infinite;
+				-o-animation: marquee 20s linear infinite;
+				animation: marquee 20s linear infinite;
+				font-size: .6rem;
+			}
+			.foohi {
+				height: 2.34667rem
+			}
+			.footer {
+				height: 3.0rem;
+				background: #fff;
+				position: fixed;
+				z-index: 999;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				-moz-box-shadow: 0 0 10px 0 rgba(155, 143, 143, 0.6);
+				-webkit-box-shadow: 0 0 10px 0 rgba(155, 143, 143, 0.6);
+				box-shadow: 0 0 10px 0 rgba(155, 143, 143, 0.6)
+			}
+
+			@media screen and (min-width: 2400px) {
+				.footer {
+					height: 1.06667rem
+				}
+			}
+
+			.footer ul li {
+				float: left;
+				text-align: center;
+				width: 25%
+			}
+
+			.footer ul li .yello {
+				color: #c60081
+			}
+
+			.footer ul li a {
+				display: inline-block;
+				cursor: pointer
+			}
+
+			.footer ul li a .icon {
+				margin-top: .128rem
+			}
+
+			@media screen and (min-width: 1300px) {
+				.footer ul li a .icon {
+					margin-top: .04267rem
+				}
+			}
+
+			.footer ul li a .icon .iconfont {
+				font-size: 1.06667rem
+			}
+
+			@media screen and (min-width: 1300px) {
+				.footer ul li a .icon .iconfont {
+					font-size: .59733rem
+				}
+			}
+
+			.footer ul li a .icon p {
+				font-size: .55467rem;
+				margin-top: .21333rem
+			}
+
+			@media screen and (min-width: 1300px) {
+				.footer ul li a .icon p {
+					font-size: .29867rem;
+					margin-top: .08533rem
+				}
+			}
+		</style>
+	</head>
+	<body>
+
+	<!--顶部搜索栏-s-->
+	<header style="background: #c60081;position: fixed;top: 0;left: 0;width: 100%;z-index: 99999;">
+		<div class="clearfix index-header" style="height: 2.4rem;">
+			<div class="clearfix index-header">
+				<div class="fl index-header-logo">
+					<img style="width: 1.6rem;height: 1.6rem;margin-top: 50%;margin-left: 20%;" src="__STATIC__/images/logo.png"/>
+				</div>
+			<div class="index-header-so fl" style="opacity: 0.899;margin: .6rem auto;margin-left: 5%;width:80%;height: 1.8rem;line-height: 1.8rem;">
+				<a href="{:U('Goods/ajaxSearch')}" style="line-height: 1.8rem;">
+					搜索美妆
+				</a>
+			</div>
+		</div>
+	</header>
+	<!--顶部搜索栏-e-->
+
+    <!--轮播图-->
+    <div class="example" style="overflow: hidden;margin-top: 3rem">
+        <div class="ft-carousel" id="slideTpshop" style="height: 200px">
+            <ul class="carousel-inner" style="height: 100%">
+                <!--广告表-->
+                <adv pid="3" limit="10" item="v">
+                    <li class="carousel-item" >
+                        <a href="{$v.ad_link}">
+                            <img src="{$v.ad_code}" title="{$v[title]}" style="height: 100%;{$v[style]}" alt="">
+                        </a>
+                    </li>
+                </adv>
+            </ul>
+        </div>
+        <script>
+            $("#slideTpshop").FtCarousel();
+        </script>
+    </div>
+	    <div class="nav" style="height: 246px">
+			<div class="adv" style="background: url(__STATIC__/images/pic.png) no-repeat;width:100%;height: 116px;background-size:100%;">
+				<img id="vip_goods" src="__STATIC__/images/pic4.png" style="width: 100%;height: 100px"/>
+			</div>
+	    	<ul class="nav-pic">
+				<li>
+					<img src="__STATIC__/images/pic6.png" />
+					<span>升级VIP</span>
+				</li>
+	    		<li>
+	    	        <img src="__STATIC__/images/pic7.png" />
+	    			<span>尖货特惠</span>
+	    		</li>
+                <li >
+                    <img src="__STATIC__/images/pic5.png" />
+                    <span>名品奖励</span>
+                </li>
+	    	</ul>
+			<div class="sous-text" id="sousText" style="overflow: hidden">
+				<!--<marquee  scrolldelay="10"><span style="">美桐荟美妆新领售：大牌原料，国家备案，专业导师和服务商线上线下贴心辅导。</span></marquee>-->
+				<p class="goods-description">
+					<span>美桐荟美妆新领售：大牌原料，国家备案，专业导师和服务商线上线下贴心辅导。</span>
+					<span class="meq">美桐荟美妆新领售：大牌原料，国家备案，专业导师和服务商线上线下贴心辅导。</span>
+				</p>
+			</div>
+	    </div>
+	    <!--美丽魅品-->
+	    <div class="goods">
+	    	<div id="ajaxGoods" class="center" onclick="ajaxGetMore(this.false)">人气推荐</div>
+	    	<ul class="goods-nav" id="goods_list">
+                <foreach name="favourite_goods" item="v">
+                    <li>
+                        <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}" style="display: block;text-decoration: none">
+                            <div>
+                                <img src="{$v[goods_id]|goods_thum_images=750,320}" style="width: 100%;"/>
+                            </div>
+                            <div style="padding: .4rem .5rem;">
+                                <p style="text-align: left;margin-left: 10px">
+                                    {$v[goods_name]|getSubstr=0,40}
+                                </p>
+                                <div class="price">
+                                    <span style="font-size: 14px">￥{$v[shop_price]}</span>
+                                    <span style="margin-left: 1rem;font-size: 14px">市场价￥{$v[market_price]}</span>
+									<span style="margin-left: 1rem;font-size: 14px">月销量{$v[sales_sum]}笔</span>
+									<span style="float:right;margin-left: 1rem;font-size: 14px">库存{$v[store_count]}</span>
+									<!--<span style="float: right;margin-left: 3rem;">库存{$v[store_count]}笔</span>-->
+                                </div>
+                                <!--<div style="height: 20px;margin-left: 10px;">-->
+                                    <!--<span class="fl" style="color:#c60081 !important;font-size: 11px;color: rgba(153,153,153,1);float: left">VIP福利：名品奖励{$v[famous_quota]}元，美妆任领{$v[vip_quota]}元</span>-->
+
+									<!--<span class="fl" style="float: right;font-size:11px;color: rgba(153,153,153,1);margin-right: .4rem">库存{$v[store_count]}笔</span>-->
+								<!--</div>-->
+                            </div>
+
+                        </a>
+                    </li>
+                </foreach>
+				<div class="center" style="margin-top: .4rem;margin-bottom: -10px;">美妆任领</div>
+	    	</ul>
+	    </div>
+
+		<div id="goods_list_one" style="background: #f5f5f5;padding:.2rem;" class="addimgchan clearfix">
+		</div>
+		<!--底部导航-start-->
+		<include file="public/footer_nav"/>
+		<!--底部导航-end-->
+	</body>
+	<script src="__STATIC__/js/swiper.min.js"></script>
+	<script>
+        $('.footer .icon i').css('font-size','1.48rem');
+        $('.footer .icon p').css('font-size','.68rem');
+        $('#liAppShare').css('height','75px').css('height','75px').css('margin-top','-1.6rem').css('border','double 10px');
+
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal', // 垂直切换选项
+            loop: true, // 循环模式选项
+
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        })
+
+        $(".nav-pic li:eq(2)").click(function () {
+            location.href = "{:url('NewGoods/goodsList')}";
+        })
+        $(".nav-pic li:eq(0)").click(function () {
+            location.href = "{:url('member/viphtml')}";
+        })
+		$(".nav-pic li:eq(1)").click(function () {
+			location.href = "{:url('member/goodsList')}";
+		})
+		$("#vip_goods").click(function () {
+			location.href = "{:url('Member/vipGoodsList')}";
+		})
+		// $.ajax({
+		// 	type: "get",
+		// 	data: {p: 0},
+		// 	url: "{:url('member/ajaxGetMore')}",
+		// 	success: function (data) {
+		// 		if (data) {
+		// 			$("#goods_list").append(data);
+		// 			before_request = 1;
+		// 		} else {
+		// 			$('.get_more').hide();
+		// 		}
+		// 	}
+		// });
+		/**
+		 * 继续加载猜您喜欢
+		 * */
+		var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+		var page = 1;
+
+		function ajaxGetMore(e, key, item) {
+//        $(e).r.css('color','#c60081');
+			getData = {p: page};
+
+			if (key) getData.sort = key;
+			if (item) getData.sort_asc = item;
+
+			$.ajax({
+				type: "get",
+				data: getData,
+				url: "{:url('ajaxGetMore')}",
+				success: function (data) {
+					if (data) {
+						$("#goods_list_one").empty().append(data);
+						before_request = 1;
+					} else {
+						$('.get_more').hide();
+					}
+				}
+			});
+
+			$(e).siblings().removeClass('index-dao-act');
+			$(e).addClass('index-dao-act');
+		}
+		$('#ajaxGoods').click();
+
+		function ajax_sourch_submit() {
+			if (before_request == 0) // 上一次请求没回来 不进行下一次请求
+				return false;
+			before_request = 0;
+			page++;
+			getData = {p: page};
+
+			$.ajax({
+				type: "get",
+				data: getData,
+				url: "{:url('ajaxGetMore')}",
+				success: function (data) {
+					if (data) {
+						$("#goods_list_one").append(data);
+						before_request = 1;
+					} else {
+						$('.get_more').hide();
+					}
+				}
+			});
+		}
+
+		//滚动加载更多
+		$(window).scroll(
+				function() {
+					var scrollTop = $(this).scrollTop();
+					var scrollHeight = $(document).height();
+					var windowHeight = $(this).height();
+					if (scrollTop + windowHeight == scrollHeight) {
+						ajax_sourch_submit();//调用加载更多
+					}
+				}
+		);
+    </script>
+<style>
+
+
+	.clearfix:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+
+	.index-header {
+		padding: 0 .4rem;
+	}
+
+	.index-header-logo {
+		width: 1rem;
+		height: 1rem;
+		margin-right: 1rem;
+	}
+
+	.index-header-logo img {
+		width: 100%;
+		height: 100%;
+	}
+
+	.index-header-so {
+		width: 80%;
+		margin: 0 auto;
+		height: 1.2rem;
+		border: none;
+		background: #fff;
+		border-radius: 35px;
+		overflow: hidden;
+	}
+
+	.index-header-so a {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: url("__STATIC__/images/c23.png") no-repeat;
+		background-size: .6rem;
+		background-position: .4rem center;
+		padding-left: 1.2rem;
+		text-align: left;
+		line-height: 1.2rem;
+		font-size: .5rem;
+		color: #666;
+	}
+
+	.index-header-dian {
+		width: .25rem;
+		height: 1rem;
+
+	}
+
+	.index-header-dian img {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+</html>

@@ -1,0 +1,114 @@
+<include file="public/header" title="资金管理" body="g4"/>
+<include file="public/header_nav" title="提现管理" href="{:U('/Mobile/User/index')}"/>
+
+    <div class="myhearder bankhearder">
+
+        <div class="hh">
+            <h2>可 用 余 额</h2>
+            <h1>￥{$user['user_money']}</h1>
+        </div>
+        <div class="scgz">
+			<a href="{:U('Mobile/User/withdrawals')}" class="tix">
+                <p>提现</p>
+            </a>
+            <!--<ul>
+                <li>
+                    <a href="{:U('Mobile/User/recharge')}">
+                        <img src="__STATIC__/images/cz.png"/>
+                        <p>充值</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Mobile/User/withdrawals')}">
+                        <img src="__STATIC__/images/tx.png"/>
+                        <p>提现</p>
+                    </a>
+                </li>
+            </ul>-->
+        </div>
+    </div>
+    <div class="floor my p">
+        <div class="content">
+            <!--<div class="floor w3">-->
+                <!--<ul>-->
+                    <!--<li>-->
+                        <!--<a href="">-->
+                            <!--<p>红包</p>-->
+                            <!--<h2>0</h2>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="">-->
+                            <!--<p>银行卡</p>-->
+                            <!--<h2>0</h2>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="{:U('Mobile/User/points')}">-->
+                            <!--<p>当前积分</p>-->
+                            <!--<h2>{$user.pay_points}</h2>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <div class="floor list7 ma-to-20">
+                <!--<div class="myorder p">-->
+                    <!--<div class="content30">-->
+                        <!--<a href="{:U('Mobile/User/points')}">-->
+                            <!--<div class="order">-->
+                                <!--<div class="fl">-->
+                                    <!--<span>账户明细</span>-->
+                                <!--</div>-->
+                                <!--<div class="fr">-->
+                                    <!--<i class="Mright"></i>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="{:U('Mobile/User/withdrawals_list')}">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>申请记录</span>
+                                </div>
+                                <div class="fr">
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div style="padding:.35rem;font-size: .6rem;">
+    <ul>
+        <li style="margin-top:.4rem;line-height: .9rem">关于“待收美币”和“提现时间”的相关说明</li>
+        <li style="margin-top:.4rem;line-height: .9rem">1.美桐荟平台任领以外商品实行7天无理由退换货，所以对于尖货特惠消费新收益采用待结算状态，即待结美币；</li>
+        <li style="margin-top:.4rem;line-height: .9rem">2.为了安全起见，退换货和人工处理时间需预留15天，即待结收益的确认时间是15天，系统会自动转化成可用美币，可用美币随时可消费，每月10号，25号17.30前可申请提现，并于三个工作日到账；</li>
+        <li style="margin-top:.4rem;line-height: .9rem">3.可用美币随时可以在美桐荟平台消费和提现；</li>
+        <li style="margin-top:.4rem;line-height: .9rem">4.每次提现不得低于125美币。</li>
+    </ul>
+</div>
+    <!--底部导航-start-->
+    <!--底部导航-end-->
+</body>
+</html>
+<style type="text/css">
+	/*提现按钮*/
+.tix{
+	display: block;
+	width: 60%;
+	height: 2rem;
+	line-height: 2rem;
+	text-align: center;
+	border: 1px solid #fff;
+	margin: 0 auto;
+	margin-bottom: 1rem;
+	color: #fff;
+	font-size: .6rem;
+}
+
+</style>

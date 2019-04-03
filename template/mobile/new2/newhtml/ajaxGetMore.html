@@ -1,0 +1,43 @@
+<style>
+    .si {
+        color: #c60081;
+        /*border: 2px #c60081 solid;*/
+        /*padding: 4px 8px;*/
+    }
+</style>
+<foreach name="favourite_goods" item="v">
+    <li>
+        <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}" style="display: block;">
+            <div class="mei-ul-img">
+                <img src="{$v[goods_id]|goods_thum_images=750,320}"/>
+            </div>
+            <div class="mei-ul-text" style="padding: .4rem .5rem">
+                <p style="text-align: left">
+                    {$v[goods_name]|getSubstr=0,40}
+                </p>
+                <p class="clearfix">
+                    <span class="fl mei-money">VIP会员价：</span>
+                    <span class="fl mei-money" style="color: red">￥{$v[shop_price]}</span>
+
+                    <span class="fl mei-number" style="margin-left: 40px;text-decoration:line-through;">市场价￥{$v[market_price]}</span>
+                    <span class="fr mei-number" style="margin-left: 40px">月销量{$v[sales_sum]}笔</span>
+
+                    <if condition="$user['is_vip'] eq 1">
+                </p>
+                <p class="clearfix" style="margin-top: 4px">
+                    <!--<span class="fl si" style="">返{$v[vip_price]}美币</span>-->
+                    <!--<span class="fl si" style="margin-left: .2rem;">送美妆福利{$v[vip_quota]}元</span>-->
+                    <!--<span class="fl si" style="margin-left: .2rem;">送名品奖券{$v[famous_quota]}元</span>-->
+                    <span class="fl si" style="">VIP福利：名品奖励{$v[famous_quota]}元，美妆任领{$v[vip_quota]}元</span>
+                    </if>
+
+                    <span class="fr mei-number">库存{$v[store_count]}</span>
+
+                    <if condition="$user['distributor_level'] gt 1">
+                        <span class="fl si" style="">行政服务商赚：美币{$v[commission]}元</span>
+                    </if>
+                </p>
+            </div>
+        </a>
+    </li>
+</foreach>

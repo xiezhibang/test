@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+/runtime/
+!/.gitignore
+/test/
+/public/upload/
+/public/bootstrap/
+/application/admin/view/
+/template/pc/
+/template/mobile/rainbow/
+/widget/
+/widget.zip
+/application/api/
+/application/test/

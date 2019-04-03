@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/distribut/css/main.css"/>
+    <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css"/>
+    <style type="text/css">
+        .preloader {
+            position: absolute;
+            left: 0;
+            top: -100px;
+            z-index: 0;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+            height: 100px;
+            width: 100%;
+            opacity: 0;
+            font-size: 25px;
+            -webkit-transition: 300ms;
+            -moz-transition: 300ms;
+            -ms-transition: 300ms;
+            -o-transition: 300ms;
+            transition: 300ms;
+            background: #c60081;
+        }
+
+        .preloader.visible {
+            top: 0;
+            opacity: 1;
+            margin-top: 1.6rem;
+        }
+
+        .goodsList-data {
+            padding: 0 !important;
+            margin: 0 !important;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .goodsList-datas {
+            margin: 0 .21333rem .4rem !important;
+        }
+
+
+    </style>
+    <style type="text/css">
+
+
+        .index-zhuan li {
+            width: 30%;
+        }
+
+        .index-zhuan li img {
+            width: 100%;
+        }
+
+        .index-zhuan li:nth-child(2) {
+            margin: 0 5%;
+        }
+
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+
+        .index-header {
+            padding: 0 .4rem;
+        }
+
+        .index-header-logo {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 1rem;
+        }
+
+        .index-header-logo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .index-header-so {
+            width: 80%;
+            margin: 0 auto;
+            height: 1rem;
+            border: none;
+            background: #fff;
+            border-radius: 35px;
+            overflow: hidden;
+        }
+
+        .index-header-so a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: url("__STATIC__/images/c23.png") no-repeat;
+            background-size: .6rem;
+            background-position: .2rem center;
+            padding-left: 1.2rem;
+            text-align: left;
+            line-height: 1rem;
+            font-size: .5rem;
+        }
+
+        .index-header-dian {
+            width: .25rem;
+            height: 1rem;
+
+        }
+
+        .index-header-dian img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .likeshop {
+            padding: 0 .4rem;
+        }
+
+        .products_kuang a {
+            display: block;
+            width: 100%;
+        }
+
+        .products_kuang a img {
+            width: 100% !important;
+        }
+
+        .similar-product-price {
+            width: auto !important;
+        }
+
+        .mslide {
+            height: 7.5rem;
+        }
+
+        .mslide img {
+            height: 7.5rem !important;
+        }
+    </style>
+</head>
+<body>
+<div class="classreturn loginsignup ">
+    <div class="content">
+        <div class="ds-in-bl return">
+            <a href="javascript:window.history.back()"><img src="__STATIC__/images/return.png" alt="返回"></a>
+        </div>
+        <div class="ds-in-bl search center">
+            <span>{$key|default="美妆福利"}</span>
+        </div>
+    </div>
+</div><!--美妆认领额度-->
+
+<div style="opacity: 0;width: 240px;height: 60px;background-color: #fff;z-index: 99999;position: absolute;left: 68%;top: 22.5%;"
+     onclick="$('#vip_text').show()"></div>
+<if condition="$is_vip eq 1">
+    <div id="vip" style="width: 100%;height: 7.5rem;position: relative;">
+        <img src="__STATIC__/images/vip.png" width="100%" height="100%"/>
+        <!--<p style="width: 100%;font-size: .8rem;color:#fff;position: absolute;top: 50%;transform: translateY(-50%);text-align: center;">-->
+            <!--剩余额度</p>-->
+        <p style="width: 100%;font-size: 1.6rem;color:#fff;position: absolute;top: 50%;transform: translateY(-50%);text-align: center;">
+            ￥{$user.quota}</p>
+    </div>
+    <else/>
+    <div id="vip" style="width: 100%;height: 7.5rem;position: relative;" onclick="$('#vip_text').show();">
+        <img src="__STATIC__/images/vip.png" width="100%" height="100%"/>
+        <p style="width: 100%;font-size: .8rem;color:#fff;position: absolute;top: 50%;transform: translateY(-50%);text-align: center;">
+           ￥0</p>
+        <!--<p style="width: 100%;font-size: .8rem;color:#fff;position: absolute;top: 65%;transform: translateY(-50%);text-align: center;">-->
+            <!--请点击了解</p>-->
+    </div>
+
+    <!--弹窗-->
+    <div id="notVip"
+         style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+         class="hides">
+        <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+            <p>您还不是美亲VIP会员，请在首页点开“升级VIP”商城任意选购一款产品，立即成为VIP会员，享有VIP美妆任领福利，以及分享和自购获得的更多惊喜和乐趣！</p>
+
+            <br/>
+            <p onclick="javascript:window.location.href='{:url('viphtml')}'"
+               style="text-align: center;text-decoration:underline;color: #c60081">现在升级VIP，点击进入！</p>
+        </div>
+    </div>
+
+    <script>
+        $('#notVip').show();
+    </script>
+</if>
+<!--弹窗-->
+<div id="vip_text"
+     style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:1.1rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <h3 style="color:#c60081;">美妆任领额度和综合运费说明：</h3>
+        <p>1.普通会员升级VIP首次获得3000元美妆任领额度；</p>
+        <br/>
+        <p>2.美妆任领额度是以产品零售价为标准计算的，VIP每推荐1个VIP可获得300元美妆任领额度，每累积推荐3个VIP再获得600元任领额度；VIP购买尖货特惠产品也将获得一定的美妆任领额度；</p>
+        <br/>
+        <p>3.综合运费包含了物流打包服务费和快递费，如VIP会员一次领多个产品，则需支付每个产品累加的综合运费。综合运费可以用等量美币支付。</p>
+        <br/>
+        <p>4.美妆任领的产品如无质量问题，不设退换。</p>
+        <if condition="$is_vip neq 1"><p onclick="javascript:window.location.href='{:url('viphtml')}'" style="text-align: center;text-decoration:underline;color: #c60081">现在升级VIP，点击进入！</p></if>
+    </div>
+</div>
+<script>
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    })
+</script>
+<div class="index-dao">
+    <ul class="clearfix">
+        <li class="fl index-dao-act" onclick="ajaxGetMore(this,false)">综合</li>
+        <li class="fl" onclick="ajaxGetMore(this,'is_new')">新品</li>
+        <li class="fl" onclick="ajaxGetMore(this,'sales_sum')">销量</li>
+        <li class="fl" onclick="ajaxGetMore(this,'shop_price','asc')">价格</li>
+    </ul>
+</div>
+<div id="goods_list" style="background: #f5f5f5;padding:.2rem;" class="addimgchan clearfix">
+</div>
+
+
+<script type="text/javascript" src="/template/mobile/new2/static/js/sourch_submit.js"></script>
+<script type="text/javascript">
+    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+    var page = 1;
+    var key = "{$key}";
+
+    function ajaxGetMore(e, sort, sort_asc) {
+//        $(e).r.css('color','#c60081');
+        getData = {p: page};
+
+        if (key !== '') getData.key = key;
+
+        if (sort) getData.sort = sort;
+        if (sort_asc) getData.sort_asc = sort_asc;
+
+        $.ajax({
+            type: "get",
+            data: getData,
+            url: "{:url('index/ajaxGetMore')}",
+            success: function (data) {
+                if (data) {
+                    $("#goods_list").empty().append(data);
+                    before_request = 1;
+                } else {
+                    $('.get_more').hide();
+                }
+            }
+        });
+
+        $(e).siblings().removeClass('index-dao-act');
+        $(e).addClass('index-dao-act');
+    }
+
+    function ajax_sourch_submit() {
+        if (before_request == 0) // 上一次请求没回来 不进行下一次请求
+            return false;
+        before_request = 0;
+        page++;
+        getData = {p: page};
+
+        $.ajax({
+            type: "get",
+            data: getData,
+            url: "{:url('index/ajaxGetMore')}",
+            success: function (data) {
+                if (data) {
+                    $("#goods_list").append(data);
+                    before_request = 1;
+                } else {
+                    $('.get_more').hide();
+                }
+            }
+        });
+    }
+
+    $('.index-dao-act').click();
+</script>
+</body>
+</html>

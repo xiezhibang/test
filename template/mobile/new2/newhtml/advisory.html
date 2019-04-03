@@ -1,0 +1,66 @@
+<include file="public/header" title="说明" body=""/>
+<div class="classreturn loginsignup " style="position: fixed;top: 0;left: 0;width: 100%;">
+    <div class="content">
+        <div class="ds-in-bl search center">
+            <span>说明</span>
+        </div>
+    </div>
+</div>
+
+<div style="margin: .52rem">
+    <dl style="box-shadow: 0rem 0rem 0.6rem #f5f5f5;">
+        <dt>关于美妆任领和名品奖励综合运费</dt>
+        <dd>①包含物流打包服务费和快递费用</dd>
+        <dd>②一次领多个产品按单品总数量累计收取综合运费</dd>
+
+        <dt>关于边远地区综合运费</dt>
+        <dd>新疆,西藏,青海,甘肃,宁夏，东北等地区需加收5元，支付运费时系统会对这些地区自动增加。</dd>
+
+        <dt>关于发货</dt>
+        <dd>①当天订单48小时內发货并更新物流信息;</dd>
+        <dd>②法定节假日发货顺延。</dd>
+
+        <dt>关于退换货</dt>
+        <dd>①尖货产品7天无理由退換货,但不影响二次销售；</dd>
+        <dd>②非质量问题退货,需要承担往返的快递费用;</dd>
+        <dd>③如遇产品路途损,请收到货24小时拍照并反馈客服,过期不处理;</dd>
+        <dd>④任领产品和奖品非质量问题不设退換。</dd>
+
+        <dt>关于美币使用与提现：</dt>
+        <dd>每个月固定10日和25日为提现申请日，一般3个工作日到账，具体请点开个人中心提现管理了解更多。</dd>
+
+        <dt>其它问题请咨询客服:</dt>
+        <dd>客服QQ：2189948828</dd>
+        <dd>微信客服 lvmin2014888</dd>
+    </dl>
+</div>
+
+<style>
+    dl{
+        padding: 1rem;
+        font-size:.6rem;
+        margin-top:2rem;
+        line-height: 1rem;
+    }
+    dt{
+        margin-top: .5rem;
+        font-weight: 900;
+    }
+
+
+</style>
+<!--底部导航-start-->
+<include file="public/footer_nav"/>
+<!--底部导航-end-->
+</body>
+</html>
+<script>
+    function ajaxsecrch() {
+        if ($.trim($('#key').val()) != '') {
+            $("#sourch_form").submit();
+        } else {
+            layer.open({content: '请输入搜索关键字', time: 2, style: 'font-size:.6rem'});
+        }
+    }
+    $('.loginsignup').parent().css('background','#fff');
+</script>

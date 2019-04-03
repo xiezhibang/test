@@ -1,0 +1,69 @@
+
+.Container{
+    width: 400px;
+    height: 200px;
+    position: absolute;
+
+}
+
+
+.circle {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    background: #808080;
+}
+
+.pie_left,.pie_right {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.left,.right {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #c0c0c0;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.pie_right,.right {
+    clip: rect(0, auto, auto, 60px);
+}
+
+.pie_left,.left {
+    clip: rect(0, 60px, auto, 0);
+}
+
+.mask {
+    width: 86%;
+    height: 86%;
+    border-radius: 50%;
+    left: 7%;
+    top: 7%;
+    background: #FFF;
+    position: absolute;
+    text-align: center;
+    line-height: 80px;
+    font-size: 35px;
+}
+
+.mask2 {
+    width: 86%;
+    height: 86%;
+    border-radius: 50%;
+    left: 7%;
+    top: 7%;
+    position: absolute;
+    text-align: center;
+    line-height: 130px;
+    font-size: 16px;
+}

@@ -1,0 +1,33 @@
+<if condition="!empty($lists)">
+    <foreach name="lists" item="v">
+        <div class="my_team_alon p ">
+            <a
+            <if condition="$lower eq 1">href="{:url('Distribut/lower_list',['user_id'=>$v['user_id']])}"
+                <else/>
+                href="javascript:void(0)
+            </if>
+            ">
+            <div class="team_head">
+                <img src="{$v[head_pic]|default=" __STATIC__/images/user68.jpg"}"/>
+            </div>
+            <div class="team_name_time" style="padding:initial;width: auto">
+                <span class="t_n">{$v[nickname]}</span>
+                <span class="t_t">团队人数：{$v[count_find]}</span>
+                <span class="t_t">加入时间：{:date('Y-m-d H:i:s',$v[reg_time])}</span>
+                <span class="t_t">手机号码：{$v[mobile]}</span>
+            </div>
+            <span class="team_price">
+                        <if condition="$v['is_vip'] eq 0">普通会员
+                        <elseif condition="$v['distributor_level'] eq 0">VIP会员
+                        <elseif condition="$v['distributor_level'] eq 1">行政服务商
+                        <elseif condition="$v['distributor_level'] eq 2">白金服务商</if>
+                    </span>
+            <!--<i class="icon-arrow_r"></i>-->
+            </a>
+        </div>
+    </foreach>
+    <else/>
+    <!--<div style="padding:1rem;text-align: center;font-size: .59733rem;color: #777777;"><img-->
+            <!--src="__STATIC__/images/none.png"/><br/><br/>亲，找不到分享会员！-->
+    <!--</div>-->
+</if>

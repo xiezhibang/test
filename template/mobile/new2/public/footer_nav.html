@@ -1,0 +1,236 @@
+
+<if condition="$user.is_vip eq 1">
+    <style>
+        .footer ul li{
+            width: 20%;
+        }
+    </style>
+</if>
+
+<div class="foohi">
+    <div class="footer">
+        <ul>
+            <li>
+                <a
+                <if condition="CONTROLLER_NAME eq 'Index'">class="yello"</if>
+                href="{:U('Index/index')}">
+                <div class="icon">
+                    <i class="icon-shouye-1 iconfont"></i>
+                    <p>首页</p>
+                </div>
+                </a>
+            </li>
+            <li>
+                <!--<a href="{:url('member/advisory')}">-->
+                <a
+                <if condition="CONTROLLER_NAME eq 'Member'">class="yello"</if>
+                    href="{:url('member/advisory')}"/>
+                <!--href="javascript:void(0);" onclick="advisory()">-->
+                    <div class="icon">
+                        <i class="iconfont icon-tianjiayonghu"></i>
+                        <p>客服</p>
+                    </div>
+                </a>
+            </li>
+            <if condition="$user.is_vip eq 1">
+            <!--<li id="liAppShare" style="border-radius: 50%;height: 3.2rem;width: 20%;margin-top: -1rem;background-color: #fb1578;color: #fff;border: double 28px;">-->
+                <!--<a style="color: #fff" onclick="appShare()">-->
+                   <!--&lt;!&ndash;href="{:url('member/viphtml')}"&ndash;&gt;-->
+
+                    <!--<div class="icon" style="margin-top: .4rem;">-->
+                        <!--<p>邀请</p>-->
+                        <!--<p>好友</p>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</li>-->
+                <li>
+                    <a onclick="appShare()">
+                    <div class="icon">
+                        <i class="icon-yuangongjiangliwodejianglijiangpinwodelipin iconfont"></i>
+                        <p>邀请</p>
+                    </div>
+                    </a>
+                </li>
+            </if>
+            <li>
+                <a
+                <if condition="CONTROLLER_NAME eq 'Cart'">class="yello"</if>
+                href="{:U('Cart/cart')}">
+                    <div class="icon">
+                        <i class="icon-daohang3dtouchgouwuche iconfont"></i>
+                        <p>购物车</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a
+                <if condition="CONTROLLER_NAME eq 'User'">class="yello"</if>
+                href="{:U('User/index')}">
+                <div class="icon">
+                    <i class="icon-wodeiconguanzhu2 iconfont"></i>
+                    <p>我的</p>
+                </div>
+                </a>
+            </li>
+        </ul>
+        <div id="appShare" class="hides"
+             style="display: none;font-size:.6rem;width: 100%;height: 100vh;background:rgba(0,0,0,.5);position: fixed;top: 0;left: 0;">
+            <div style="background: #fff;width: 100%;position: absolute;bottom: 0;left: 0;">
+                <!--<div style="padding: .5rem 0;text-align: center;line-height: 1rem">成功分享3位好友获得1000元任领额度和100元美币奖励！<br/>现在邀请</div>-->
+                <div style="border-top:1px solid black;border-bottom:1px solid black;padding: 1.2rem 0;"
+                     class="clearfix">
+                    <div class="fl" style="width: 50%;text-align: center;" onclick="wxShare('session')">
+                        <img src="__STATIC__/images/appShare1.png" alt=""
+                             style="width: 2.5rem;height: 2.5rem;margin: 0 auto;display: block;margin-bottom: .5rem">
+                        微信
+                    </div>
+                    <div class="fl" style="width: 50%;text-align: center;" onclick="wxShare('timeline')">
+                        <img src="__STATIC__/images/appShare2.png" alt=""
+                             style="width: 2.5rem;height: 2.5rem;margin: 0 auto;display: block;margin-bottom: .5rem">
+                        微信朋友圈
+                    </div>
+                </div>
+                <div style="text-align: center;padding: 1rem 0" onclick="$('#appShare').hide()">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--弹窗-->
+<div id="advisory" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <h3 style="">关于美妆福利综合运费</h3>
+        <p>①包含物流人工成本均摊和快递费用；</p>
+        <p>②一次领多个产品按单品总数量累计收取综合运费。</p>
+
+        <br/>
+        <h3 style="">关于边远地区综合运费</h3>
+        <p>新疆，西藏，青海，甘肃，宁夏地区需加收5元。</p>
+
+
+        <br/>
+        <h3 style="">关于发货</h3>
+        <p>①当天订单48小时内发货并更新物流信息；</p>
+        <p>②法定节假日发货顺延。</p>
+
+
+        <br/>
+        <h3 style="">关于退换货</h3>
+        <p>①尖货特惠产品7天无理由退换货，但不影响二次销售；</p>
+        <p>②非质量问题退货，需要承担往返的快递费用；</p>
+        <p>③如遇产品路途损坏，请收到货24小时拍照并反馈客服，过期不处理；</p>
+        <p>④美妆福利产品不设退换货。</p>
+
+        <br/>
+        <h3 style="">其它问题请咨询客服：</h3>
+        <p>工作日时间：每日9:00—18:00。</p>
+        <p>客服QQ：{$tpshop_config['shop_info_qq']}</p>
+    </div>
+</div>
+<!--弹窗-->
+<div id="notVip" style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <p>您还不是美亲VIP会员，请在首页点开“升级VIP”商城任意选购一款产品，立即成为VIP会员，享有VIP美妆任领福利，以及分享和自购获得的更多惊喜和乐趣！</p>
+
+        <br/>
+        <p onclick="javascript:window.location.href='{:url('viphtml')}'" style="text-align: center;text-decoration:underline;color: #c60081">现在升级VIP，点击进入！</p>
+    </div>
+</div>
+<script type="text/javascript">
+    function advisory() {
+        $('#advisory').toggle();
+    }
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    })
+</script>
+<script type="text/javascript">
+    //  自动登录
+    var user = '{$user.user_id}';
+    var is_vip = '{$user.is_vip}';
+    if (user === '') {
+        userData = {
+            username: window.localStorage.getItem('username'),
+            password: window.localStorage.getItem('password')
+        };
+
+        $.ajax({
+            type: 'post',
+            url: '/index.php?m=Mobile&c=User&a=do_login&t=' + Math.random(),
+            data: userData,
+            dataType: 'json',
+            success: function (res) {
+                if (res.status === 1) {
+//                    is_vip = res.result.is_vip;
+                    if (res.result.is_vip === 1){
+                        location.reload();
+                    }
+                }
+            }
+        })
+    }
+    //        userData = window.parent.$api.getStorage('userData');
+
+    var wx;
+    apiready = function () {
+        wx = api.require('wx');
+    };
+
+    var shareUrl = "{$_SERVER['SERVER_NAME']}{:url('register/reg',['distribut'=>session('user.user_id')])}";
+    function wxShare(scene) {
+        wx.shareWebpage({
+//            apiKey: '',
+            scene: scene,
+            title: "{$tpshop_config['shop_info_store_title']}",
+            description: '化妆品不用买啦\n上美桐荟领！领！领！',
+            thumb: 'http://{$_SERVER["SERVER_NAME"]}__STATIC__/images/appShare.png',
+            contentUrl: shareUrl
+        }, function (ret, err) {
+            if (ret.status) {
+                alert('分享成功');
+                $('.hides').click();
+            }
+//            else {
+//                alert(err.code);
+//            }
+        });
+    }
+
+    function appShare() {
+        if (is_vip === '1') {
+            $('#appShare').show();
+        } else {
+            $('#notVip').show();
+//            shareUrl = "{:url('user/login')}";
+//            window.location.href = shareUrl;
+//            console.log(shareUrl);
+        }
+    }
+
+
+    $(document).ready(function () {
+        var cart_cn = getCookie('cn');
+        if (cart_cn == '') {
+            $.ajax({
+                type: "GET",
+                url: "/index.php?m=Mobile&c=Cart&a=header_cart_list",//+tab,
+                success: function (data) {
+                    cart_cn = getCookie('cn');
+                    $('#cart_quantity').html(cart_cn);
+                }
+            });
+        }
+        $('#cart_quantity').html(cart_cn);
+    });
+</script>
+<!-- 微信浏览器 调用微信 分享js-->
+<!--<//include file="public/wx_share"/>-->
+<!-- 微信浏览器 调用微信 分享js  end-->

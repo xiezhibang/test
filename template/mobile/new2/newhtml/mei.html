@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/distribut/css/main.css"/>
+    <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css"/>
+    <style>
+        #goods_list .si{
+            left:-2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="classreturn loginsignup " style="border-bottom:0;background-color: #fff">
+    <div class="content">
+        <div class="ds-in-bl return">
+            <a href="javascript:window.history.back()"><img src="__STATIC__/images/return.png" alt="返回"></a>
+        </div>
+        <div class="ds-in-bl search center" style="line-height: 1.8rem">
+            <span>尖货特惠</span>
+        </div>
+    </div>
+    <div class="index-dao">
+        <ul class="clearfix">
+            <li class="fl index-dao-act" onclick="ajaxGetMore(this,false)">综合</li>
+            <li class="fl" onclick="ajaxGetMore(this,'is_new')">新品</li>
+            <li class="fl" onclick="ajaxGetMore(this,'sales_sum')">销量</li>
+            <li class="fl" onclick="ajaxGetMore(this,'shop_price','asc')">价格</li>
+        </ul>
+    </div>
+    <div class="mei-ul">
+        <ul id="goods_list" style="line-height: normal">
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+        var page = 1;
+        function ajaxGetMore(e, key, item) {
+//        $(e).r.css('color','#c60081');
+            getData = {p: page};
+
+            if (key) getData.sort = key;
+            if (item) getData.sort_asc = item;
+
+            $.ajax({
+                type: "get",
+                data: getData,
+                url: "{:url('ajaxGetMore')}",
+                success: function (data) {
+                    if (data) {
+                        $("#goods_list").empty().append(data);
+                        before_request = 1;
+                    } else {
+                        $('.get_more').hide();
+                    }
+                }
+            });
+
+            $(e).siblings().removeClass('index-dao-act');
+            $(e).addClass('index-dao-act');
+        }
+        $('.index-dao-act').click();
+    </script>
+</body>
+</html>

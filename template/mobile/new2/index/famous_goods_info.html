@@ -1,0 +1,241 @@
+<include file="public/header" title="商品详情" body=""/>
+<div class="he_sustain" style="position: fixed;top: 0;left: 0;width: 100%;">
+    <div class="classreturn loginsignup detail">
+        <div class="content">
+            <div class="ds-in-bl return">
+                <a href="javascript:history.back(-1)"><img src="__STATIC__/images/return.png" alt="返回"></a>
+            </div>
+            <div class="ds-in-bl search center">
+                <span>详情</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--顶部隐藏菜单-s-->
+<include file="public/top_nav"/>
+<!--顶部隐藏菜单-e-->
+<!--商品抢购 start-->
+<!--商品s-->
+<div class="xq_details" style="margin-top: 1.87733rem;">
+    <div class="banner ban1 detailban">
+        <div class="mslide mslide-img" id="slideTpshop">
+            <ul>
+                <!--图片-s-->
+                <foreach name="goods_images_list" item="pic">
+                    <li><a href="javascript:void(0)"><img src="{$pic[image_url]}" alt=""></a></li>
+                </foreach>
+                <!--图片-e-->
+            </ul>
+
+        </div>
+        <div class="mslide-conrent">
+            <span class="mslide-conrent-money">名品额度￥{$goods.market_price}</span>
+            <!--<span>零售价￥0</span>-->
+            <!--<span class="mslide-conrent-money">￥339.00</span><span>会员价￥275.00</span>-->
+        </div>
+    </div>
+    <div class="goodsInfo-content ">
+        <div class="clearfix">
+            <div class="fl goodsInfo-content-l">
+                {$goods.goods_name}
+            </div>
+            <!--<div onclick="appShare()" class="fr goodsInfo-content-r">-->
+                <!--<i class="goodsInfo-content-r-icon"></i>-->
+                <!--<p>分享有礼</p>-->
+            <!--</div>-->
+        </div>
+        <div class="clearfix goodsInfo-content-text">
+            <span class="fl">零售价￥{$goods.cost_price}</span>
+            <span class="fl">综合运费：</span><span class="fl font_color">￥{$goods.shop_price}</span>
+            <span class="fl">库存{$goods.store_count}件</span>
+            <span class="fr">{$goods.sales_sum}人已买</span>
+        </div>
+    </div>
+    <div class="goodsInfo-data">
+        <if condition="$good['is_recommend'] eq 1"><span class="goodsInfo-data-icon">推荐</span></if>
+        {$goods.goods_remark}
+    </div>
+    <div class="goodsInfo-datas">
+        <p class="goodsInfo-datas-title">
+            商品详情
+        </p>
+        <style>
+            #goodsContent p img {
+                width: 100%;
+            }
+        </style>
+        <div id="goodsContent">
+            {$goods.goods_content|htmlspecialchars_decode}
+        </div>
+    </div>
+    <!--添加购物车JS-->
+    <script src="__PUBLIC__/js/mobile_common.js" type="text/javascript" charset="utf-8"></script>
+</div>
+<!--商品-e-->
+
+<!--底部按钮-s-->
+<div class="podee">
+    <div class="cart-concert-btm p">
+        <!--<div class="fl">-->
+           	<!--<span class="goodsInfo-money">-->
+           		<!--零售价￥{$goods.cost_price}-->
+           	<!--</span>-->
+        <!--</div>-->
+        <div class="fr goodsInfo-cart">
+
+            <!--<a style="display:block;" href="javascript:void(0);" onclick="AjaxAddCart({$goods.goods_id},1,1);">立即领取</a>-->
+
+            <ul class="clearfix">
+                <li class="">
+                    <span style="color:#888888 ;font-size: .6rem;line-height:2.1rem;">综合运费￥{$goods.shop_price}</span>
+                    <!--<a class="pb_plusshopcar button active_button " href="javascript :void(0);"-->
+                    <!--onClick="AjaxAddCart({$goods.goods_id},1,0);"> 加入购物车</a>-->
+                </li>
+                <li class="r" style="margin-top: .3rem">
+                    <a style="display:block;" href="javascript:void(0);" onclick="AjaxAddVipCart({$goods.goods_id},1);">立即领取</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="choose_shop_aready p">
+    <!--商品信息-s-->
+    <div class="shop-top-under p">
+        <div class="maleri30">
+            <div class="shopprice">
+                <div class="img_or fl"><img id="zoomimg" src="{$goods.original_img}"></div>
+                <div class="fon_or fl">
+                    <h2 class="similar-product-text">{$goods.goods_name}</h2>
+                    <input type="hidden" id="goods_name" name="goods_id" value="{$goods.goods_id}">
+                    <div class="price_or" id="goods_price"><span>￥</span><span>{$goods.shop_price}</span></div>
+                    <div class="dqkc_or"><span>剩余库存：</span><span id="spec_store_count">{$goods.store_count}</span></div>
+                    <div class="dqkc_or buy_limit" style="display: none"><span>限购：</span><span id="buy_limit">{$goods.virtual_limit}</span></div>
+                    <div class="price_or team-pies p" style="display: none"><span class="confinetime">该商品拼团中</span><a class="pb_buy team_button">点击前往</a></div>
+                </div>
+                <div class="price_or fr">
+                    <i class="xxgro"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品信息-e-->
+    <div class="shop-top-under p">
+        <div class="maleri30">
+            <div class="shulges p">
+                <p>数量</p>
+                <!--选择数量-->
+                <div class="plus">
+                    <span class="mp_minous" onclick="altergoodsnum(-1);">-</span>
+                    <span class="mp_mp">
+                        <input type="tel" class="num buyNum" id="number" residuenum="{$goods.store_count}" name="goods_num" value="1" min="1" max="{$goods.store_count}" onblur="altergoodsnum(0)">
+                                </span>
+                    <span class="mp_plus" onclick="altergoodsnum(1);">+</span>
+                </div>
+            </div>
+            <volist name="goods['spec']" id="spec">
+                <div class="shulges p choicsel" >
+                    <p>{$spec['name']}</p>
+                    <!-------商品属性值-s------->
+                    <volist name="spec['spec_item']" id="spec_item">
+                        <div class="plus choic-sel">
+                            <a id="goods_spec_a_{$spec_item['id']}" title="{$spec_item['item']}" class="spec_item"
+                            <volist name="goods['spec_image']" id="spec_image">
+                                <if condition="$spec_image['spec_image_id'] eq $spec_item['id']">
+                                    data-img-src="{$spec_image['src']}"
+                                </if>
+                            </volist>
+                            >
+                            <input id="goods_spec_{$spec_item['id']}" style="display: none" type="radio" name="goods_spec[{$spec['name']}]" value="{$spec_item['id']}"/>{$spec_item['item']}
+                            </a>
+                        </div>
+                    </volist>
+                    <!-------商品属性值-e-------->
+                </div>
+            </volist>
+        </div>
+    </div>
+    <div class="btns-fixed-wrap">
+        <div class="plusshopcar-buy p btns-fixed-w100">
+            <a id="join_cart" class="pb_buy buy_button" href="javascript:void(0);" >加入购物车</a>
+            <a id="buy_now" class="pb_buy buy_button" href="javascript:void(0);" >立即购买 </a>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<div id="notVip"
+     style="display:none;position: fixed;top: 0;left: 0;width: 100%;height: 100vh;background: rgba(0,0,0,.4);z-index: 999999;"
+     class="hides">
+    <div style="line-height:.8rem;width: 90%;font-size:.55rem;padding: .5rem;background: #fff;border-radius: .2rem;position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+        <p>您还不是美亲VIP会员，现在只需{:tpCache('distribut.vip_price')}元办理一张美亲VIP课程卡立即成为VIP会员，立即享有任领产品和分享好友特权，还有更多权益与乐趣！</p>
+
+        <br/>
+        <p onclick="javascript:window.location.href='{:url('viphtml')}'"
+           style="text-align: center;text-decoration:underline;color: #c60081">请联系你的会员推荐人，咨询注册办理！</p>
+    </div>
+</div>
+<!--底部按钮-e-->
+<style>
+    /*.podee .cart-concert-btm .fr{*/
+    /*width: 30%;*/
+    /*}*/
+    .podee .cart-concert-btm .fl {
+        width: 35%;
+    }
+
+    .podee .cart-concert-btm .fr {
+        width: 65%;
+    }
+
+    .goodsInfo-cart {
+        margin-top: 0;
+    }
+</style>
+<script type="text/javascript">
+    //隐藏弹窗
+    $('.hides').click(function (event) {
+        var el1 = event.currentTarget;
+        var el2 = event.target;
+        if (el1 == el2) {
+            $('.hides').hide()
+        }
+    })
+    /**
+     * addcart 将商品加入购物车
+     * @goods_id  商品id
+     * @num   商品数量
+     * @form_id  商品详情页所在的 form表单
+     * @to_catr 加入购物车后再跳转到 购物车页面 默认不跳转 1 为跳转
+     * layer弹窗插件请参考http://layer.layui.com/mobile/
+     */
+    var is_vip = '{$user.is_vip}';
+    function AjaxAddVipCart(goods_id, num) {
+        if (is_vip === '1') {
+            $.ajax({
+                type: "POST",
+                url: "/index.php?m=Mobile&c=Cart&a=ajaxAddCart",
+                data: {goods_id: goods_id, goods_num: num},
+                dataType: 'json',
+                success: function (data) {
+                    layer.open({content: data.msg, time: 3});
+                    if (data.status === 1) {
+//                        tp_cart_info = $('#tp_cart_info');
+//                        cart_num = parseInt(tp_cart_info.html()) + parseInt(num);
+//                        tp_cart_info.html(cart_num);
+                        window.location.href = "/index.php?m=Mobile&c=Cart&a=cart";
+                        return false;
+                    }else{
+                        location.reload();
+                        return false;
+                    }
+                }
+            });
+        } else {
+            $('#notVip').show();
+//            shareUrl = "{:url('user/login')}";
+//            window.location.href = shareUrl;
+//            console.log(shareUrl);
+        }
+    }
+</script>
